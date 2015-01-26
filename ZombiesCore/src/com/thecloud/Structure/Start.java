@@ -1,9 +1,19 @@
 package com.thecloud.Structure;
 
+import com.thecloud.Listeners.Joining;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+
 public class Start implements Runnable{
 
-    public void run() {
+    int countdowntime = 60;
 
+    public void run() {
+        if (Joining.onlinePlayers.size() == 2) {
+            for (Player p : Joining.onlinePlayers) {
+                p.sendMessage("");
+            }
+        }
     }
 
 }
