@@ -10,9 +10,7 @@ public class Start implements Runnable{
 
     public void run() {
         if (Joining.onlinePlayers.size() == 2) {
-            for (Player p : Joining.onlinePlayers) {
-                p.sendMessage("");
-            }
+            ChatUtilities.broadcast("");
         }
     }
 

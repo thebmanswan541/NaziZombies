@@ -7,9 +7,6 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 import java.util.ArrayList;
 
-/**
- * Created by Mitchell on 1/25/2015.
- */
 public class Joining implements Listener{
 
     public static ArrayList<Player> onlinePlayers = new ArrayList<Player>();
