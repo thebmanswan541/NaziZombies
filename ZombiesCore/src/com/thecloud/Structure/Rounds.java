@@ -4,8 +4,6 @@ public class Rounds {
 
     private int round = 1;
 
-    private Rounds() {  }
-
     static Rounds instance;
 
     //Gets the rounds class
