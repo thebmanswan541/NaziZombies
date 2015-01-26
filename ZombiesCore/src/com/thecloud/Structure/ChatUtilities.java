@@ -5,6 +5,10 @@ import org.bukkit.ChatColor;
 
 public class ChatUtilities {
 
+    public static String tag() {
+        return ChatColor.DARK_GRAY+"["+ChatColor.DARK_GREEN+"Zombies"+ChatColor.DARK_GRAY+"]"+ChatColor.GRAY+": ";
+    }
+
     public static void broadcast(String message) {
         Bukkit.broadcastMessage(ChatColor.DARK_GRAY+"["+ChatColor.DARK_GREEN+"Zombies"+ChatColor.DARK_GRAY+"]"+ChatColor.GRAY+": "+ChatColor.RESET+message);
     }
