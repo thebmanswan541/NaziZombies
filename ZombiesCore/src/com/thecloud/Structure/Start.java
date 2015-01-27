@@ -24,10 +24,10 @@ public class Start implements Runnable {
             ChatUtilities.broadcast("30 seconds until the game starts!");
         } else if (countdowntime == 0) {
             plugin.stopCountdown();
+            GameState.setGameState(GameState.IN_GAME);
         } else if (countdowntime <= 10 && countdowntime != 0) {
             ChatUtilities.broadcast(countdowntime+" seconds until the game starts!");
         }
-
         countdowntime--;
     }
 
