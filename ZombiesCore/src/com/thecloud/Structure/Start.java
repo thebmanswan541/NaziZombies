@@ -2,7 +2,7 @@ package com.thecloud.Structure;
 
 import com.thecloud.Core;
 import com.thecloud.Listeners.StartListener;
-import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 
 public class Start implements Runnable {
 
@@ -25,6 +25,9 @@ public class Start implements Runnable {
         } else if (countdowntime == 0) {
             plugin.stopCountdown();
             GameState.setGameState(GameState.IN_GAME);
+            for (Player player : StartListener.onlinePlayers) {
+                Credits.setCredits(player, 500);
+            }
         } else if (countdowntime <= 10 && countdowntime != 0) {
             ChatUtilities.broadcast(countdowntime+" seconds until the game starts!");
         }
