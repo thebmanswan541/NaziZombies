@@ -16,7 +16,7 @@ public class Core extends JavaPlugin {
     }
 
     public void startCountdown() {
-        countdownID = Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Start(), 0, 20);
+        countdownID = Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Start(this), 0, 20);
     }
 
     public void stopCountdown() {

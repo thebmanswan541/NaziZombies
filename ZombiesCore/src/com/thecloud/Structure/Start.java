@@ -1,9 +1,16 @@
 package com.thecloud.Structure;
 
+import com.thecloud.Core;
 import com.thecloud.Listeners.StartListener;
 import org.bukkit.ChatColor;
 
 public class Start implements Runnable {
+
+    private Core plugin;
+
+    public Start(Core pl) {
+        plugin = pl;
+    }
 
     public static int countdowntime = 60;
 
@@ -16,7 +23,7 @@ public class Start implements Runnable {
         if (countdowntime == 30) {
             ChatUtilities.broadcast("30 seconds until the game starts!");
         } else if (countdowntime == 0) {
-
+            plugin.stopCountdown();
         } else if (countdowntime <= 10 && countdowntime != 0) {
             ChatUtilities.broadcast(countdowntime+" seconds until the game starts!");
         }

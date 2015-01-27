@@ -31,6 +31,7 @@ public class StartListener implements Listener {
         e.setJoinMessage(ChatUtilities.tag()+ChatColor.GRAY + p.getName() + ChatColor.YELLOW + " joined the game!");
         if (onlinePlayers.size() == 2 && Start.countdowntime == 60) {
             ChatUtilities.broadcast("1 minute until the game starts!");
+            plugin.startCountdown();
         }
     }
 
