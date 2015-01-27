@@ -30,8 +30,7 @@ public class StartListener implements Listener {
         onlinePlayers.add(p);
         e.setJoinMessage(ChatUtilities.tag()+ChatColor.GRAY + p.getName() + ChatColor.YELLOW + " joined the game!");
         if (onlinePlayers.size() == 2 && Start.countdowntime == 60) {
-            Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, new Start(), 0, 20);
-            ChatUtilities.broadcast(ChatColor.GRAY+"1 minute until game starts!");
+            ChatUtilities.broadcast("1 minute until the game starts!");
         }
     }
 
