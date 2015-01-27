@@ -28,9 +28,10 @@ public class Start implements Runnable {
             for (Player player : StartListener.onlinePlayers) {
                 Credits.setCredits(player, 500);
             }
-        } else if (countdowntime <= 10 && countdowntime != 0) {
+        } else if (countdowntime <= 10) {
             ChatUtilities.broadcast(countdowntime+" seconds until the game starts!");
         }
+
         countdowntime--;
     }
 

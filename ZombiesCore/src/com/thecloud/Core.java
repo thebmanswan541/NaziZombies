@@ -1,5 +1,6 @@
 package com.thecloud;
 
+import com.thecloud.Listeners.Restrictions;
 import com.thecloud.Listeners.StartListener;
 import com.thecloud.Structure.GameState;
 import com.thecloud.Structure.Start;
@@ -13,6 +14,9 @@ public class Core extends JavaPlugin {
     public void onEnable() {
         GameState.setGameState(GameState.IN_LOBBY);
         Bukkit.getPluginManager().registerEvents(new StartListener(this), this);
+        Bukkit.getPluginManager().registerEvents(new Restrictions(), this);
+        Bukkit.getPluginManager().addPermission(Restrictions.blockBreak);
+        Bukkit.getPluginManager().addPermission(Restrictions.blockPlace);
     }
 
     public void startCountdown() {
