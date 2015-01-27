@@ -2,22 +2,15 @@ package com.thecloud.Structure;
 
 public class Rounds {
 
-    private int round = 1;
-
-    static Rounds instance;
-
-    //Gets the rounds class
-    public static Rounds getInstance() {
-        return instance;
-    }
+    private static int round = 1;
 
     //Increments the round by 1
-    public void addRound() {
+    public static void addRound() {
         round++;
     }
 
     //Retrieves the round number
-    public int getRound() {
+    public static int getRound() {
         return round;
     }
 
