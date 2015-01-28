@@ -2,9 +2,8 @@ package com.thecloud.Structure;
 
 import org.bukkit.Location;
 
-public class Arena {
+public class ArenaManager {
 
-    private Location spawn;
 
 
 }

@@ -38,8 +38,15 @@ public class StartListener implements Listener {
     @EventHandler
     public void onLeave(PlayerQuitEvent e) {
         Player p = e.getPlayer();
+
         if (onlinePlayers.contains(p)) {
             onlinePlayers.remove(p);
+        }
+
+        if (StartListener.onlinePlayers.size() <= 1) {
+            ChatUtilities.broadcast("Game start cancelled.");
+            Start.countdowntime = 60;
+            plugin.stopCountdown();
         }
     }
 
