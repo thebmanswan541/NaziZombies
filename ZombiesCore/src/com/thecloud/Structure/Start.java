@@ -2,6 +2,8 @@ package com.thecloud.Structure;
 
 import com.thecloud.Core;
 import com.thecloud.Listeners.StartListener;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
 public class Start implements Runnable {
@@ -22,6 +24,9 @@ public class Start implements Runnable {
             GameState.setGameState(GameState.IN_GAME);
             for (Player player : StartListener.onlinePlayers) {
                 Credits.setCredits(player, 500);
+                player.getInventory().addItem(Items.createItem(Material.IRON_SWORD, 1, ChatColor.GRAY+"Knife", null));
+                player.getInventory().addItem(Items.createItem(Material.WOOD_SPADE, 1, null, null));
+                player.getInventory().setItem(9, Items.createItem(Material.WHEAT, 40, ChatColor.GRAY+"Colt M1911 Ammunition", null));
             }
         } else if (countdowntime <= 10) {
             ChatUtilities.broadcast(countdowntime+" seconds until the game starts!");

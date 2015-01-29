@@ -17,6 +17,8 @@ public class Core extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new Restrictions(), this);
         Bukkit.getPluginManager().addPermission(Restrictions.blockBreak);
         Bukkit.getPluginManager().addPermission(Restrictions.blockPlace);
+        Bukkit.getPluginManager().addPermission(Restrictions.invClick);
+        Bukkit.getPluginManager().addPermission(Restrictions.invOpen);
     }
 
     public void startCountdown() {

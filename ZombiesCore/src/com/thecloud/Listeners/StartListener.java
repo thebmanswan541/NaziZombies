@@ -42,11 +42,12 @@ public class StartListener implements Listener {
         if (onlinePlayers.contains(p)) {
             onlinePlayers.remove(p);
         }
-
-        if (StartListener.onlinePlayers.size() <= 1) {
-            ChatUtilities.broadcast("Game start cancelled.");
-            Start.countdowntime = 60;
-            plugin.stopCountdown();
+        if (GameState.isState(GameState.IN_LOBBY)) {
+            if (StartListener.onlinePlayers.size() <= 1) {
+                ChatUtilities.broadcast("Game start cancelled.");
+                Start.countdowntime = 60;
+                plugin.stopCountdown();
+            }
         }
     }
 
