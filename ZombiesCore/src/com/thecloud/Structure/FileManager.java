@@ -16,30 +16,30 @@ public class FileManager {
         return instance;
     }
 
-    File arenas;
-    FileConfiguration arenasConfig;
+    File spawns;
+    FileConfiguration spawnsConfig;
 
     public void setup(Plugin p) {
-        arenas = new File(p.getDataFolder(), "arenas.yml");
+        spawns = new File(p.getDataFolder(), "spawn.yml");
 
-        if (!arenas.exists()) {
+        if (!spawns.exists()) {
             try {
-                arenas.createNewFile();
+                spawns.createNewFile();
             } catch(Exception e) {
                 e.printStackTrace();
             }
         }
 
-        arenasConfig = YamlConfiguration.loadConfiguration(arenas);
+        spawnsConfig = YamlConfiguration.loadConfiguration(spawns);
     }
 
-    public FileConfiguration getArenas() {
-        return arenasConfig;
+    public FileConfiguration getSpawns() {
+        return spawnsConfig;
     }
 
-    public void saveArenas() {
+    public void saveSpawns() {
         try {
-            arenasConfig.save(arenas);
+            spawnsConfig.save(spawns);
         } catch(Exception e) {
             e.printStackTrace();
         }

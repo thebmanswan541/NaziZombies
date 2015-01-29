@@ -27,6 +27,7 @@ public class Start implements Runnable {
                 player.getInventory().addItem(Items.createItem(Material.IRON_SWORD, 1, ChatColor.GRAY+"Knife", null));
                 player.getInventory().addItem(Items.createItem(Material.WOOD_SPADE, 1, null, null));
                 player.getInventory().setItem(9, Items.createItem(Material.WHEAT, 40, ChatColor.GRAY+"Colt M1911 Ammunition", null));
+                SpawnManager.teleportToSpawn(player);
             }
         } else if (countdowntime <= 10) {
             ChatUtilities.broadcast(countdowntime+" seconds until the game starts!");
