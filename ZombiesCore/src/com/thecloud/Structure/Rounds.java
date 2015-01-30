@@ -1,5 +1,7 @@
 package com.thecloud.Structure;
 
+import org.bukkit.entity.Player;
+
 public class Rounds {
 
     private static int round = 1;
