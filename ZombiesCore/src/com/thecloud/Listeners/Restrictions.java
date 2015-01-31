@@ -6,6 +6,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.permissions.Permission;
@@ -61,8 +62,18 @@ public class Restrictions implements Listener{
     @EventHandler
     public void onDamage(EntityDamageByEntityEvent e) {
         if (e.getDamager() instanceof Player && e.getEntity() instanceof Player) {
-            e.setCancelled(true);
+            Player p = (Player) e.getDamager();
+            if (p.hasPermission(damagePerm)) {
+                e.setCancelled(false);
+            } else {
+                e.setCancelled(true);
+            }
         }
+    }
+
+    @EventHandler
+    public void onFoodLevelChange(FoodLevelChangeEvent e) {
+        e.setCancelled(true);
     }
 
 }

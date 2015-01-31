@@ -1,6 +1,5 @@
 package com.thecloud.Structure;
 
-import net.minecraft.server.v1_7_R4.ChatModifier;
 import net.minecraft.server.v1_7_R4.ChatSerializer;
 import net.minecraft.server.v1_7_R4.IChatBaseComponent;
 import net.minecraft.server.v1_7_R4.PlayerConnection;

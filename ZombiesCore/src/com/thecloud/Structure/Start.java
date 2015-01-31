@@ -30,11 +30,9 @@ public class Start implements Runnable {
                 player.getInventory().setItem(9, Utilities.createItem(Material.WHEAT, 40, ChatColor.GRAY + "Colt M1911 Ammunition", null));
                 Utilities.teleportToSpawn(player);
                 player.setLevel(Rounds.getRound());
-                Utilities.sendTitle(player, ChatColor.RED+"Round "+Rounds.getRound(), ChatColor.GREEN+"Nazi Zombies", 20, 30, 20);
+                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "playsound RoundStart "+player.getName());
+                Utilities.sendTitle(player, ChatColor.RED+"Round "+Rounds.getRound(), null, 20, 30, 20);
             }
-            World w = Bukkit.getWorld(FileManager.getInstance().getSpawns().getString("spawn.world"));
-            Location loc = new Location(w, FileManager.getInstance().getSpawns().getDouble("spawn.x"), FileManager.getInstance().getSpawns().getDouble("spawn.y"), FileManager.getInstance().getSpawns().getDouble("spawn.z"));
-            loc.getWorld().playSound(loc, Sound.CREEPER_DEATH, 1, 1);
         } else if (countdowntime <= 5) {
             Utilities.broadcast(countdowntime + " seconds until the game starts!");
         }
