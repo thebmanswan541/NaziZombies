@@ -38,10 +38,15 @@ public class Utilities {
         CraftPlayer p = (CraftPlayer) player;
         PlayerConnection connection = p.getHandle().playerConnection;
         IChatBaseComponent titleJSON = ChatSerializer.a("{'text': '"+ChatColor.translateAlternateColorCodes('&', title)+"'}");
-        IChatBaseComponent subtitleJSON = ChatSerializer.a("{'text': '"+ChatColor.translateAlternateColorCodes('&', subtitle)+"'}");
-        connection.sendPacket(new ProtocolInjector.PacketTitle(ProtocolInjector.PacketTitle.Action.TIMES, fadeIn, stay, fadeOut));
-        connection.sendPacket(new ProtocolInjector.PacketTitle(ProtocolInjector.PacketTitle.Action.TITLE, titleJSON));
-        connection.sendPacket(new ProtocolInjector.PacketTitle(ProtocolInjector.PacketTitle.Action.SUBTITLE, subtitleJSON));
+        if (subtitle == null) {
+            connection.sendPacket(new ProtocolInjector.PacketTitle(ProtocolInjector.PacketTitle.Action.TIMES, fadeIn, stay, fadeOut));
+            connection.sendPacket(new ProtocolInjector.PacketTitle(ProtocolInjector.PacketTitle.Action.TITLE, titleJSON));
+        } else {
+            IChatBaseComponent subtitleJSON = ChatSerializer.a("{'text': '" + ChatColor.translateAlternateColorCodes('&', subtitle) + "'}");
+            connection.sendPacket(new ProtocolInjector.PacketTitle(ProtocolInjector.PacketTitle.Action.TIMES, fadeIn, stay, fadeOut));
+            connection.sendPacket(new ProtocolInjector.PacketTitle(ProtocolInjector.PacketTitle.Action.TITLE, titleJSON));
+            connection.sendPacket(new ProtocolInjector.PacketTitle(ProtocolInjector.PacketTitle.Action.SUBTITLE, subtitleJSON));
+        }
     }
 
     public static void teleportToSpawn(Player p) {

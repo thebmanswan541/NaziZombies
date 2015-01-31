@@ -22,6 +22,7 @@ public class DamageHandler implements Listener {
             Player p = (Player) e.getDamager();
             if (e.getEntity() instanceof Zombie) {
                 Credits.addCredits(p, 10);
+                p.setLevel(Credits.getCredits(p));
                 if (p.getItemInHand().getType() == Material.IRON_SWORD) {
                     e.setDamage(75D);
                 }
@@ -35,6 +36,7 @@ public class DamageHandler implements Listener {
     public void onKill(EntityDeathEvent e) {
         if (e.getEntity() instanceof Zombie) {
             Credits.addCredits(e.getEntity().getKiller(), 50);
+            e.getEntity().getKiller().setLevel(Credits.getCredits(e.getEntity().getKiller()));
         }
     }
 
