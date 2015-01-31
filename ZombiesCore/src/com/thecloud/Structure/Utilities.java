@@ -50,7 +50,9 @@ public class Utilities {
         double x = settings.getSpawns().getDouble("spawn.x");
         double y = settings.getSpawns().getDouble("spawn.y");
         double z = settings.getSpawns().getDouble("spawn.z");
-        Location l = new Location(w, x, y, z);
+        int pitch = settings.getSpawns().getInt("spawn.pitch");
+        int yaw = settings.getSpawns().getInt("spawn.yaw");
+        Location l = new Location(w, x, y, z, pitch, yaw);
         p.teleport(l);
     }
 

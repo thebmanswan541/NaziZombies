@@ -30,6 +30,8 @@ public class SetSpawn implements CommandExecutor{
             settings.getSpawns().set("spawn.x", x);
             settings.getSpawns().set("spawn.y", y);
             settings.getSpawns().set("spawn.z", z);
+            settings.getSpawns().set("spawn.pitch", p.getLocation().getPitch());
+            settings.getSpawns().set("spawn.yaw", p.getLocation().getYaw());
             settings.saveSpawns();
             p.sendMessage(Utilities.tag()+ChatColor.GREEN+"Successfully set the spawn!");
         }
