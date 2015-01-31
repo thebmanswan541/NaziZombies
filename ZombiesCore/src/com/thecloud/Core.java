@@ -3,6 +3,7 @@ package com.thecloud;
 import com.thecloud.Commands.SetSpawn;
 import com.thecloud.Listeners.Restrictions;
 import com.thecloud.Listeners.StartListener;
+import com.thecloud.Structure.FileManager;
 import com.thecloud.Structure.GameState;
 import com.thecloud.Structure.Start;
 import org.bukkit.Bukkit;
@@ -11,9 +12,11 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Core extends JavaPlugin {
 
     public static int countdownID;
+    FileManager settings = FileManager.getInstance();
 
     public void onEnable() {
         GameState.setGameState(GameState.IN_LOBBY);
+        settings.setup(this);
         Bukkit.getPluginManager().registerEvents(new StartListener(this), this);
         Bukkit.getPluginManager().registerEvents(new Restrictions(), this);
         Bukkit.getPluginManager().addPermission(Restrictions.blockBreak);
