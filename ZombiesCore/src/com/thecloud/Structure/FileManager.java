@@ -20,6 +20,8 @@ public class FileManager {
     FileConfiguration spawnsConfig;
 
     public void setup(Plugin p) {
+        if (!p.getDataFolder().exists()) p.getDataFolder().mkdir();
+
         spawns = new File(p.getDataFolder(), "spawn.yml");
 
         if (!spawns.exists()) {
