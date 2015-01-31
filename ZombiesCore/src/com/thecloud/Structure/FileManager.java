@@ -1,5 +1,6 @@
 package com.thecloud.Structure;
 
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
@@ -8,9 +9,8 @@ import java.io.File;
 
 public class FileManager {
 
-    private FileManager() { }
-
-    static FileManager instance;
+    private FileManager() {  }
+    private static FileManager instance = new FileManager();
 
     public static FileManager getInstance() {
         return instance;
@@ -27,7 +27,7 @@ public class FileManager {
         if (!spawns.exists()) {
             try {
                 spawns.createNewFile();
-            } catch(Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -47,4 +47,7 @@ public class FileManager {
         }
     }
 }
+
+
+
 

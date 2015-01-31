@@ -4,6 +4,7 @@ import com.thecloud.Core;
 import com.thecloud.Listeners.StartListener;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 public class Start implements Runnable {
@@ -30,6 +31,7 @@ public class Start implements Runnable {
                 Utilities.teleportToSpawn(player);
                 player.setLevel(Rounds.getRound());
                 Utilities.sendTitle(player, ChatColor.RED+"Round "+Rounds.getRound(), ChatColor.GREEN+"Nazi Zombies", 20, 30, 20);
+                player.playSound(player.getLocation(), Sound.CREEPER_DEATH, 10000L, 10000L);
             }
         } else if (countdowntime <= 10) {
             Utilities.broadcast(countdowntime + " seconds until the game starts!");

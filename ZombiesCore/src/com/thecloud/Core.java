@@ -12,11 +12,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Core extends JavaPlugin {
 
     public static int countdownID;
-    FileManager settings = FileManager.getInstance();
 
     public void onEnable() {
+        FileManager.getInstance().setup(this);
         GameState.setGameState(GameState.IN_LOBBY);
-        settings.setup(this);
         Bukkit.getPluginManager().registerEvents(new StartListener(this), this);
         Bukkit.getPluginManager().registerEvents(new Restrictions(), this);
         Bukkit.getPluginManager().addPermission(Restrictions.blockBreak);
