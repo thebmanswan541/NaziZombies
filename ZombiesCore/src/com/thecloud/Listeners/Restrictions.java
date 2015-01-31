@@ -5,6 +5,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.permissions.Permission;
@@ -15,6 +16,7 @@ public class Restrictions implements Listener{
     public static Permission blockPlace = new Permission("zombies.Block.Place");
     public static Permission invClick = new Permission("zombies.Inventory.Click");
     public static Permission invOpen = new Permission("zombies.Inventory.Open");
+    public static Permission damagePerm = new Permission("zombies.DamagePlayer");
 
     @EventHandler
     public void onBreak(BlockBreakEvent e) {
@@ -52,6 +54,13 @@ public class Restrictions implements Listener{
         if (p.hasPermission(invOpen)) {
             e.setCancelled(false);
         } else {
+            e.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onDamage(EntityDamageByEntityEvent e) {
+        if (e.getDamager() instanceof Player && e.getEntity() instanceof Player) {
             e.setCancelled(true);
         }
     }

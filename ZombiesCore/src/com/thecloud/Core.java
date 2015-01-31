@@ -1,5 +1,6 @@
 package com.thecloud;
 
+import com.thecloud.Commands.SetSpawn;
 import com.thecloud.Listeners.Restrictions;
 import com.thecloud.Listeners.StartListener;
 import com.thecloud.Structure.GameState;
@@ -19,6 +20,7 @@ public class Core extends JavaPlugin {
         Bukkit.getPluginManager().addPermission(Restrictions.blockPlace);
         Bukkit.getPluginManager().addPermission(Restrictions.invClick);
         Bukkit.getPluginManager().addPermission(Restrictions.invOpen);
+        getCommand("setspawn").setExecutor(new SetSpawn());
     }
 
     public void startCountdown() {

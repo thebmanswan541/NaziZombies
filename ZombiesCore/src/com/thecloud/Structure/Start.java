@@ -4,7 +4,6 @@ import com.thecloud.Core;
 import com.thecloud.Listeners.StartListener;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.craftbukkit.v1_7_R4.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
 public class Start implements Runnable {
@@ -28,7 +27,8 @@ public class Start implements Runnable {
                 player.getInventory().addItem(Utilities.createItem(Material.IRON_SWORD, 1, ChatColor.GRAY + "Knife", null));
                 player.getInventory().addItem(Utilities.createItem(Material.WOOD_SPADE, 1, null, null));
                 player.getInventory().setItem(9, Utilities.createItem(Material.WHEAT, 40, ChatColor.GRAY + "Colt M1911 Ammunition", null));
-                SpawnManager.teleportToSpawn(player);
+                Utilities.teleportToSpawn(player);
+                player.setLevel(Rounds.getRound());
                 Utilities.sendTitle(player, ChatColor.RED+"Round "+Rounds.getRound(), ChatColor.GREEN+"Nazi Zombies", 20, 30, 20);
             }
         } else if (countdowntime <= 10) {

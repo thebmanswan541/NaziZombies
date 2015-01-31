@@ -4,19 +4,18 @@ import net.minecraft.server.v1_7_R4.ChatModifier;
 import net.minecraft.server.v1_7_R4.ChatSerializer;
 import net.minecraft.server.v1_7_R4.IChatBaseComponent;
 import net.minecraft.server.v1_7_R4.PlayerConnection;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.craftbukkit.v1_7_R4.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.spigotmc.ProtocolInjector;
 
-import java.util.Iterator;
 import java.util.List;
 
 public class Utilities {
+
+    static FileManager settings = FileManager.getInstance();
 
     public static String tag() {
         return ChatColor.DARK_GRAY+"["+ChatColor.DARK_GREEN+"Zombies"+ChatColor.DARK_GRAY+"]"+ChatColor.GRAY+": ";
@@ -44,6 +43,16 @@ public class Utilities {
         connection.sendPacket(new ProtocolInjector.PacketTitle(ProtocolInjector.PacketTitle.Action.TIMES, fadeIn, stay, fadeOut));
         connection.sendPacket(new ProtocolInjector.PacketTitle(ProtocolInjector.PacketTitle.Action.TITLE, titleJSON));
         connection.sendPacket(new ProtocolInjector.PacketTitle(ProtocolInjector.PacketTitle.Action.SUBTITLE, subtitleJSON));
+    }
+
+    public static void teleportToSpawn(Player p) {
+        String[] split = settings.getSpawns().getString("spawn").split(":");
+        World w = Bukkit.getWorld(split[0]);
+        double x = Double.parseDouble(split[1]);
+        double y = Double.parseDouble(split[2]);
+        double z = Double.parseDouble(split[3]);
+        Location l = new Location(w, x, y, z);
+        p.teleport(l);
     }
 
 }

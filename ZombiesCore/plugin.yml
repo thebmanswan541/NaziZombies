@@ -1,3 +1,7 @@
 name: ZombiesCore
 main: com.thecloud.Core
 version: 1.0
+commands:
+    setspawn:
+            description: Sets the spawn.
+            usage: /<command>
