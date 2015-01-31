@@ -1,6 +1,7 @@
 package com.thecloud.Commands;
 
 import com.thecloud.Structure.FileManager;
+import com.thecloud.Structure.Utilities;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.command.Command;
@@ -28,6 +29,7 @@ public class SetSpawn implements CommandExecutor{
             String s = settings.getSpawns().getString("spawn");
             settings.getSpawns().set(s, world+":"+x+":"+y+":"+z);
             settings.saveSpawns();
+            p.sendMessage(Utilities.tag()+ChatColor.GREEN+"Successfully set the spawn!");
         }
         return true;
     }
