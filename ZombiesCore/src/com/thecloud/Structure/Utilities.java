@@ -46,11 +46,10 @@ public class Utilities {
     }
 
     public static void teleportToSpawn(Player p) {
-        String[] split = settings.getSpawns().getString("spawn").split(":");
-        World w = Bukkit.getWorld(split[0]);
-        double x = Double.parseDouble(split[1]);
-        double y = Double.parseDouble(split[2]);
-        double z = Double.parseDouble(split[3]);
+        World w = Bukkit.getWorld(settings.getSpawns().getString("spawn.world"));
+        double x = settings.getSpawns().getDouble("spawn.x");
+        double y = settings.getSpawns().getDouble("spawn.y");
+        double z = settings.getSpawns().getDouble("spawn.z");
         Location l = new Location(w, x, y, z);
         p.teleport(l);
     }
