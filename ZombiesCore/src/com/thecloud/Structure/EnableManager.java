@@ -15,6 +15,7 @@ public class EnableManager {
 
     public void setup(Core plugin) {
         this.plugin = plugin;
+        Bukkit.getPluginManager().registerEvents(new ChatFormat(), plugin);
         Bukkit.getPluginManager().registerEvents(new DamageHandler(), plugin);
         Bukkit.getPluginManager().registerEvents(new Restrictions(), plugin);
         Bukkit.getPluginManager().registerEvents(new StartListener(plugin), plugin);

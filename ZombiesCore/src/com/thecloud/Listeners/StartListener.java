@@ -35,6 +35,13 @@ public class StartListener implements Listener {
 
         p.setGameMode(GameMode.ADVENTURE);
 
+        if (Bukkit.getScoreboardManager().getMainScoreboard().getTeam("normal") == null) {
+            t = Bukkit.getScoreboardManager().getMainScoreboard().registerNewTeam("normal");
+            t.setPrefix("§7");
+        }
+
+        t.addPlayer(p);
+
         onlinePlayers.add(p);
 
         e.setJoinMessage(Utilities.tag()+ChatColor.GRAY + p.getName() + ChatColor.YELLOW + " joined the game!");
@@ -48,6 +55,12 @@ public class StartListener implements Listener {
     @EventHandler
     public void onLeave(PlayerQuitEvent e) {
         Player p = e.getPlayer();
+
+        if (Bukkit.getScoreboardManager().getMainScoreboard().getTeam("normal") != null) {
+            if (Bukkit.getScoreboardManager().getMainScoreboard().getTeam("normal").hasPlayer(p)) {
+                t.removePlayer(p);
+            }
+        }
 
         if (onlinePlayers.contains(p)) {
             onlinePlayers.remove(p);

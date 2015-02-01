@@ -4,7 +4,7 @@ import com.mysql.jdbc.Util;
 import com.thecloud.Structure.*;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.Team;
 
 public class Core extends JavaPlugin {
 

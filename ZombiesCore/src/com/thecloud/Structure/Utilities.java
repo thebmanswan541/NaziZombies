@@ -69,17 +69,40 @@ public class Utilities {
         o.setDisplaySlot(DisplaySlot.SIDEBAR);
 
         Team t = scoreboard.getTeam("Gold");
+        Team t1 = scoreboard.getTeam("Blue");
+        Team t2 = scoreboard.getTeam("White");
+        Team t3 = scoreboard.getTeam("Green");
 
         if (t == null) {
             t = scoreboard.registerNewTeam("Gold");
+        }
+        if (t1 == null) {
+            t1 = scoreboard.registerNewTeam("Blue");
+        }
+        if (t2 == null) {
+            t2 = scoreboard.registerNewTeam("White");
+        }
+        if (t3 == null) {
+            t3 = scoreboard.registerNewTeam("Green");
         }
 
         for (Player player : StartListener.onlinePlayers) {
             Score s = o.getScore(player.getDisplayName());
             s.setScore(Credits.getCredits(player));
-            t.addPlayer(player);
+            if (t2.getSize() < 1) {
+                t2.addPlayer(player);
+            } else if (t1.getSize() < 1) {
+                t1.addPlayer(player);
+            } else if (t3.getSize() < 1) {
+                t3.addPlayer(player);
+            } else if (t.getSize() < 1) {
+                t.addPlayer(player);
+            }
         }
         t.setPrefix("§6");
+        t1.setPrefix("§b");
+        t2.setPrefix("§f");
+        t3.setPrefix("§a");
         p.setScoreboard(scoreboard);
     }
 

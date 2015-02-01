@@ -24,6 +24,7 @@ public class Start implements Runnable {
         } else if (countdowntime == 0) {
             plugin.stopCountdown();
             GameState.setGameState(GameState.IN_GAME);
+            Bukkit.getScoreboardManager().getMainScoreboard().getTeam("normal").unregister();
             for (Player player : StartListener.onlinePlayers) {
                 player.getInventory().clear();
                 Credits.setCredits(player, 500);
