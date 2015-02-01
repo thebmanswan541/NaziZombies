@@ -1,9 +1,7 @@
 package com.thecloud.Listeners;
 
-import com.mysql.jdbc.Util;
 import com.thecloud.Structure.Credits;
 import com.thecloud.Structure.GameState;
-import com.thecloud.Structure.Start;
 import com.thecloud.Structure.Utilities;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -12,8 +10,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
-
-import javax.xml.soap.SAAJResult;
 
 public class DamageHandler implements Listener {
 

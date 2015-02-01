@@ -4,6 +4,7 @@ import com.thecloud.Core;
 import com.thecloud.Listeners.StartListener;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
+import org.bukkit.scoreboard.Team;
 
 public class Start implements Runnable {
 
@@ -24,15 +25,19 @@ public class Start implements Runnable {
             plugin.stopCountdown();
             GameState.setGameState(GameState.IN_GAME);
             for (Player player : StartListener.onlinePlayers) {
+                player.getInventory().clear();
                 Credits.setCredits(player, 500);
                 player.getInventory().addItem(Utilities.createItem(Material.IRON_SWORD, 1, ChatColor.GRAY + "Knife", null));
                 player.getInventory().addItem(Utilities.createItem(Material.WOOD_SPADE, 1, null, null));
                 player.getInventory().setItem(9, Utilities.createItem(Material.WHEAT, 40, ChatColor.GRAY + "Colt M1911 Ammunition", null));
                 Utilities.teleportToSpawn(player);
                 player.setLevel(Rounds.getRound());
-                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "playsound RoundStart "+player.getName());
-                Utilities.sendTitle(player, ChatColor.RED+"Round "+Rounds.getRound(), null, 20, 60, 20);
+                Utilities.sendTitle(player, ChatColor.RED + "Round " + Rounds.getRound(), null, 20, 60, 20);
             }
+
+            World w = Bukkit.getWorld(FileManager.getInstance().getSpawns().getString("spawn.world"));
+            Location loc = new Location(w, FileManager.getInstance().getSpawns().getDouble("spawn.x"), FileManager.getInstance().getSpawns().getDouble("spawn.y"), FileManager.getInstance().getSpawns().getDouble("spawn.z"));
+            loc.getWorld().playSound(loc, Sound.CREEPER_DEATH, 1, 1);
 
             for (Player player : StartListener.onlinePlayers) {
                 Utilities.refreshScoreboard(player);
