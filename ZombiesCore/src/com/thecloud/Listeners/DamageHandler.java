@@ -1,7 +1,10 @@
 package com.thecloud.Listeners;
 
+import com.mysql.jdbc.Util;
 import com.thecloud.Structure.Credits;
 import com.thecloud.Structure.GameState;
+import com.thecloud.Structure.Start;
+import com.thecloud.Structure.Utilities;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Zombie;
@@ -9,6 +12,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+
+import javax.xml.soap.SAAJResult;
 
 public class DamageHandler implements Listener {
 
@@ -22,7 +27,9 @@ public class DamageHandler implements Listener {
             Player p = (Player) e.getDamager();
             if (e.getEntity() instanceof Zombie) {
                 Credits.addCredits(p, 10);
-                p.setLevel(Credits.getCredits(p));
+                for (Player pl : StartListener.onlinePlayers) {
+                    Utilities.refreshScoreboard(pl);
+                }
                 if (p.getItemInHand().getType() == Material.IRON_SWORD) {
                     e.setDamage(75D);
                 }
@@ -36,7 +43,9 @@ public class DamageHandler implements Listener {
     public void onKill(EntityDeathEvent e) {
         if (e.getEntity() instanceof Zombie) {
             Credits.addCredits(e.getEntity().getKiller(), 50);
-            e.getEntity().getKiller().setLevel(Credits.getCredits(e.getEntity().getKiller()));
+            for (Player pl : StartListener.onlinePlayers) {
+                Utilities.refreshScoreboard(pl);
+            }
         }
     }
 

@@ -33,6 +33,10 @@ public class Start implements Runnable {
                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "playsound RoundStart "+player.getName());
                 Utilities.sendTitle(player, ChatColor.RED+"Round "+Rounds.getRound(), null, 20, 60, 20);
             }
+
+            for (Player player : StartListener.onlinePlayers) {
+                Utilities.refreshScoreboard(player);
+            }
         } else if (countdowntime <= 5) {
             Utilities.broadcast(countdowntime + " seconds until the game starts!");
         }

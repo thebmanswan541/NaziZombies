@@ -1,5 +1,6 @@
 package com.thecloud.Structure;
 
+import com.thecloud.Listeners.StartListener;
 import net.minecraft.server.v1_7_R4.ChatSerializer;
 import net.minecraft.server.v1_7_R4.IChatBaseComponent;
 import net.minecraft.server.v1_7_R4.PlayerConnection;
@@ -8,6 +9,7 @@ import org.bukkit.craftbukkit.v1_7_R4.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.scoreboard.*;
 import org.spigotmc.ProtocolInjector;
 
 import java.util.List;
@@ -58,6 +60,18 @@ public class Utilities {
         int yaw = settings.getSpawns().getInt("spawn.yaw");
         Location l = new Location(w, x, y, z, pitch, yaw);
         p.teleport(l);
+    }
+
+    public static void refreshScoreboard(Player p) {
+        Scoreboard scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
+        Objective o = scoreboard.registerNewObjective("dummy", "Credits");
+        o.setDisplayName(ChatColor.RED+"Credits");
+        o.setDisplaySlot(DisplaySlot.SIDEBAR);
+        for (Player player : StartListener.onlinePlayers) {
+            Score s = o.getScore(player.getDisplayName());
+            s.setScore(Credits.getCredits(player));
+        }
+        p.setScoreboard(scoreboard);
     }
 
 }
