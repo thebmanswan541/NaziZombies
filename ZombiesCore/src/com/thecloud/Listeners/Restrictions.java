@@ -2,11 +2,13 @@ package com.thecloud.Listeners;
 
 import com.thecloud.Structure.GameState;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
@@ -78,6 +80,15 @@ public class Restrictions implements Listener{
             e.setCancelled(true);
         } else {
             e.setCancelled(false);
+        }
+    }
+
+    @EventHandler
+    public void onSpawn(EntitySpawnEvent e) {
+        if (e.getEntity() instanceof Zombie) {
+            e.setCancelled(false);
+        } else {
+            e.setCancelled(true);
         }
     }
 

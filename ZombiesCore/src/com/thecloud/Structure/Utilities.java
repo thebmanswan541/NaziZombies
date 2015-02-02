@@ -112,16 +112,4 @@ public class Utilities {
     public static Scoreboard getBoard() {
         return board;
     }
-
-    public static void createZombieSpawnChain(List<Player> players, Location location, int numZombies, double health) {
-        World world = null;
-        for (Player player : players) {
-            world = player.getWorld();
-        }
-        for (int i = 0; i < numZombies; i++) {
-            Zombie zombie = Bukkit.getWorld(world.getName()).spawn(location, Zombie.class);
-            zombie.setMaxHealth(health);
-            zombie.setHealth(health);
-        }
-    }
 }
