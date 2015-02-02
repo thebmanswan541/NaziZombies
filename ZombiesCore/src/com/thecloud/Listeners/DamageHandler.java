@@ -31,7 +31,7 @@ public class DamageHandler implements Listener {
                 }
             }
         } else if (e.getDamager() instanceof Zombie && e.getEntity() instanceof Player) {
-            e.setDamage(10D);
+            e.setDamage(8D);
         }
     }
 

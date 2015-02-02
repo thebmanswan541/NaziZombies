@@ -23,7 +23,6 @@ public class EnableManager {
         Bukkit.getPluginManager().addPermission(Restrictions.invOpen);
         Bukkit.getPluginManager().addPermission(Restrictions.blockBreak);
         Bukkit.getPluginManager().addPermission(Restrictions.blockPlace);
-        Bukkit.getPluginManager().addPermission(Restrictions.damagePerm);
         plugin.getCommand("setspawn").setExecutor(new SetSpawn());
     }
 

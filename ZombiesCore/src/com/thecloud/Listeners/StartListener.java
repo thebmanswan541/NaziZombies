@@ -44,7 +44,7 @@ public class StartListener implements Listener {
 
         onlinePlayers.add(p);
 
-        e.setJoinMessage(Utilities.tag()+ChatColor.GRAY + p.getName() + ChatColor.YELLOW + " joined the game!");
+        e.setJoinMessage(Utilities.tag()+ChatColor.GRAY + p.getName() + " joined the game!");
 
         if (onlinePlayers.size() == 2 && Start.countdowntime == 60) {
             Utilities.broadcast("1 minute until the game starts!");

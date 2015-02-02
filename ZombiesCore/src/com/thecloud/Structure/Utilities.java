@@ -7,6 +7,7 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.craftbukkit.v1_8_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Zombie;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scoreboard.*;
@@ -62,28 +63,30 @@ public class Utilities {
         p.teleport(l);
     }
 
+    private static Scoreboard board;
+
     public static void refreshScoreboard(Player p) {
-        Scoreboard scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
-        Objective o = scoreboard.registerNewObjective("Credits", "dummy");
+        board = Bukkit.getScoreboardManager().getNewScoreboard();
+        Objective o = board.registerNewObjective("Credits", "dummy");
         o.setDisplayName(ChatColor.RED+"Credits");
         o.setDisplaySlot(DisplaySlot.SIDEBAR);
 
-        Team t = scoreboard.getTeam("Gold");
-        Team t1 = scoreboard.getTeam("Blue");
-        Team t2 = scoreboard.getTeam("White");
-        Team t3 = scoreboard.getTeam("Green");
+        Team t = board.getTeam("Yellow");
+        Team t1 = board.getTeam("Blue");
+        Team t2 = board.getTeam("White");
+        Team t3 = board.getTeam("Green");
 
         if (t == null) {
-            t = scoreboard.registerNewTeam("Gold");
+            t = board.registerNewTeam("Yellow");
         }
         if (t1 == null) {
-            t1 = scoreboard.registerNewTeam("Blue");
+            t1 = board.registerNewTeam("Blue");
         }
         if (t2 == null) {
-            t2 = scoreboard.registerNewTeam("White");
+            t2 = board.registerNewTeam("White");
         }
         if (t3 == null) {
-            t3 = scoreboard.registerNewTeam("Green");
+            t3 = board.registerNewTeam("Green");
         }
 
         for (Player player : StartListener.onlinePlayers) {
@@ -91,19 +94,34 @@ public class Utilities {
             s.setScore(Credits.getCredits(player));
             if (t2.getSize() < 1) {
                 t2.addPlayer(player);
-            } else if (t1.getSize() < 1) {
-                t1.addPlayer(player);
-            } else if (t3.getSize() < 1) {
-                t3.addPlayer(player);
             } else if (t.getSize() < 1) {
                 t.addPlayer(player);
+            } else if (t3.getSize() < 1) {
+                t3.addPlayer(player);
+            } else if (t1.getSize() < 1) {
+                t1.addPlayer(player);
             }
         }
-        t.setPrefix("§6");
+        t.setPrefix("§e");
         t1.setPrefix("§b");
         t2.setPrefix("§f");
         t3.setPrefix("§a");
-        p.setScoreboard(scoreboard);
+        p.setScoreboard(board);
     }
 
+    public static Scoreboard getBoard() {
+        return board;
+    }
+
+    public static void createZombieSpawnChain(List<Player> players, Location location, int numZombies, double health) {
+        World world = null;
+        for (Player player : players) {
+            world = player.getWorld();
+        }
+        for (int i = 0; i < numZombies; i++) {
+            Zombie zombie = Bukkit.getWorld(world.getName()).spawn(location, Zombie.class);
+            zombie.setMaxHealth(health);
+            zombie.setHealth(health);
+        }
+    }
 }
