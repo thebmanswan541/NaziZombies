@@ -7,9 +7,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntitySpawnEvent;
-import org.bukkit.event.entity.FoodLevelChangeEvent;
+import org.bukkit.event.entity.*;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
@@ -84,12 +82,18 @@ public class Restrictions implements Listener{
     }
 
     @EventHandler
-    public void onSpawn(EntitySpawnEvent e) {
-        if (e.getEntity() instanceof Zombie) {
+    public void onSpawn(CreatureSpawnEvent e) {
+        if (e.getSpawnReason() == CreatureSpawnEvent.SpawnReason.CUSTOM || e.getSpawnReason() == CreatureSpawnEvent.SpawnReason.SPAWNER_EGG) {
             e.setCancelled(false);
         } else {
             e.setCancelled(true);
         }
+    }
+
+    @EventHandler
+    public void onDeath(EntityDeathEvent e) {
+        e.getDrops().clear();
+        e.setDroppedExp(0);
     }
 
 }
