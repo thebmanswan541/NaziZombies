@@ -24,7 +24,7 @@ public class RoundListener implements Listener{
     @EventHandler
     public void onDeath(EntityDeathEvent e) {
         if (e.getEntity() instanceof Zombie) {
-            if (ZombieManager.getZombiesLeft(e.getEntity().getKiller().getWorld())-1 <= 0) {
+            if (ZombieManager.getZombiesLeft(e.getEntity().getKiller().getWorld()) == 0) {
                 Rounds.addRound();
                 for (Player pl : StartListener.onlinePlayers) {
                     pl.getWorld().playSound(pl.getLocation(), Sound.BAT_DEATH, 1, 1);
