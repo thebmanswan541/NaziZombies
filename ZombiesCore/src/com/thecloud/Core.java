@@ -1,10 +1,8 @@
 package com.thecloud;
 
-import com.mysql.jdbc.Util;
-import com.thecloud.Structure.*;
-import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scoreboard.Team;
+import org.bukkit.Bukkit;
+import com.thecloud.Structure.*;
 
 public class Core extends JavaPlugin {
 
@@ -13,6 +11,7 @@ public class Core extends JavaPlugin {
 
     public void onEnable() {
         FileManager.getInstance().setup(this);
+        DoorManager.getInstance().setup();
         GameState.setGameState(GameState.IN_LOBBY);
         manager.setup(this);
     }
