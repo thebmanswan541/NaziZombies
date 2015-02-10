@@ -2,10 +2,7 @@ package com.thecloud.Structure;
 
 import com.thecloud.Commands.SetSpawn;
 import com.thecloud.Core;
-import com.thecloud.Listeners.DamageHandler;
-import com.thecloud.Listeners.Restrictions;
-import com.thecloud.Listeners.RoundListener;
-import com.thecloud.Listeners.StartListener;
+import com.thecloud.Listeners.*;
 import org.bukkit.Bukkit;
 
 public class EnableManager {
@@ -21,6 +18,7 @@ public class EnableManager {
         this.plugin = plugin;
         settings.setup(plugin);
         doors.setup();
+        Bukkit.getPluginManager().registerEvents(new CreateDoor(), plugin);
         Bukkit.getPluginManager().registerEvents(new ChatFormat(), plugin);
         Bukkit.getPluginManager().registerEvents(new DamageHandler(), plugin);
         Bukkit.getPluginManager().registerEvents(new Restrictions(), plugin);
