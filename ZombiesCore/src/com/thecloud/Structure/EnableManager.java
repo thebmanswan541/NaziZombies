@@ -14,8 +14,13 @@ public class EnableManager {
 
     public EnableManager() { }
 
+    FileManager settings = FileManager.getInstance();
+    DoorManager doors = DoorManager.getInstance();
+
     public void setup(Core plugin) {
         this.plugin = plugin;
+        settings.setup(plugin);
+        doors.setup();
         Bukkit.getPluginManager().registerEvents(new ChatFormat(), plugin);
         Bukkit.getPluginManager().registerEvents(new DamageHandler(), plugin);
         Bukkit.getPluginManager().registerEvents(new Restrictions(), plugin);

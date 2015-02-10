@@ -10,8 +10,6 @@ public class Core extends JavaPlugin {
     EnableManager manager = new EnableManager();
 
     public void onEnable() {
-        FileManager.getInstance().setup(this);
-        DoorManager.getInstance().setup();
         GameState.setGameState(GameState.IN_LOBBY);
         manager.setup(this);
     }

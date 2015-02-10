@@ -62,10 +62,12 @@ public class FileManager {
 
     public void set(String path, Object value) {
         doorsConfig.set(path, value);
+        save();
     }
 
     public ConfigurationSection createConfigurationSection(String path) {
         ConfigurationSection section = doorsConfig.createSection(path);
+        save();
         return section;
     }
 

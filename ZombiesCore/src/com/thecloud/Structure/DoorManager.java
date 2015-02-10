@@ -8,7 +8,7 @@ public class DoorManager {
 
     private DoorManager() { }
 
-    static DoorManager instance;
+    private static DoorManager instance = new DoorManager();
 
     public static DoorManager getInstance() {
         return instance;
@@ -24,7 +24,7 @@ public class DoorManager {
         }
 
         for (String door : FileManager.getInstance().<ConfigurationSection>get("doors").getKeys(false)) {
-            doors.add(new Door(door, FileManager.getInstance().<ConfigurationSection>get("doors").getValues(true)));
+            doors.add(new Door(door, FileManager.getInstance().<ConfigurationSection>get("doors." + door).getValues(true)));
         }
     }
 

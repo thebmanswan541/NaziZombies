@@ -35,6 +35,7 @@ public class Door implements ConfigurationSerializable{
 
     public void setUnlocked(boolean unlocked) {
         this.unlocked = unlocked;
+        save();
     }
 
     public String getLocation() {
@@ -43,6 +44,7 @@ public class Door implements ConfigurationSerializable{
 
     public void setLocation(String location) {
         this.location = location;
+        save();
     }
 
     public Integer getCost() {
@@ -51,6 +53,7 @@ public class Door implements ConfigurationSerializable{
 
     public void setCost(int cost) {
         this.cost = cost;
+        save();
     }
 
     @Override
