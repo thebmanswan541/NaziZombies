@@ -26,6 +26,7 @@ public class CreateDoor implements Listener{
         for (int i = 0; i < e.getLines().length; i++) {
             if (e.getLine(i).toLowerCase().contains("door")) {
                 door.add(p);
+                p.sendMessage(ChatColor.GREEN+"Please left click this sign to make it door!");
             }
         }
     }
@@ -41,6 +42,7 @@ public class CreateDoor implements Listener{
                     DoorManager.getInstance().addDoor(new Door(s.getLine(0), s.getWorld().getName()+":"+s.getLocation().getX()+":"+s.getLocation().getY()+":"+s.getLocation().getZ(), Integer.parseInt(s.getLine(1))));
                     Door d = DoorManager.getInstance().getDoor(s.getLine(0));
                     s.setLine(0, null); s.setLine(1, ChatColor.RED+""+d.getCost());
+                    p.sendMessage(ChatColor.GREEN+"Door created!");
                 }
             }
         }
