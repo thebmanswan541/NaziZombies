@@ -17,8 +17,7 @@ import java.util.ArrayList;
 
 public class CreateDoor implements Listener{
 
-    private String s;
-    ArrayList<Player> door;
+    ArrayList<Player> door = new ArrayList<Player>();
 
     @EventHandler
     public void onSign(SignChangeEvent e) {
@@ -41,7 +40,9 @@ public class CreateDoor implements Listener{
                     Sign s = (Sign) b.getState();
                     DoorManager.getInstance().addDoor(new Door(s.getLine(0), s.getWorld().getName()+":"+s.getLocation().getX()+":"+s.getLocation().getY()+":"+s.getLocation().getZ(), Integer.parseInt(s.getLine(1))));
                     Door d = DoorManager.getInstance().getDoor(s.getLine(0));
-                    s.setLine(0, null); s.setLine(1, ChatColor.RED+""+d.getCost());
+                    s.setLine(0, null);
+                    s.setLine(1, ChatColor.RED+""+d.getCost());
+                    door.remove(p);
                     p.sendMessage(ChatColor.GREEN+"Door created!");
                 }
             }

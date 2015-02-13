@@ -5,6 +5,8 @@ import net.minecraft.server.v1_8_R1.*;
 import org.bukkit.*;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.block.*;
+import org.bukkit.block.Block;
 import org.bukkit.craftbukkit.v1_8_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Zombie;
@@ -13,6 +15,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scoreboard.*;
 import org.bukkit.scoreboard.Scoreboard;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Utilities {
@@ -111,5 +114,18 @@ public class Utilities {
 
     public static Scoreboard getBoard() {
         return board;
+    }
+
+    public static void breakDoor(Location signLocation) {
+        Location[] locations = new Location[] { new Location(signLocation.getWorld(), signLocation.getX()+1, signLocation.getY(), signLocation.getZ()), new Location(signLocation.getWorld(), signLocation.getX()-1, signLocation.getY(), signLocation.getZ()), new Location(signLocation.getWorld(), signLocation.getX(), signLocation.getY(), signLocation.getZ()+1), new Location(signLocation.getWorld(), signLocation.getX(), signLocation.getY(), signLocation.getZ()-1), new Location(signLocation.getWorld(), signLocation.getX()+1, signLocation.getY(), signLocation.getZ()+1), new Location(signLocation.getWorld(), signLocation.getX()-1, signLocation.getY(), signLocation.getZ()+1), new Location(signLocation.getWorld(), signLocation.getX()+1, signLocation.getY(), signLocation.getZ()-1), new Location(signLocation.getWorld(), signLocation.getX()-1, signLocation.getY(), signLocation.getZ()-1), new Location(signLocation.getWorld(), signLocation.getX()+1, signLocation.getY()+1, signLocation.getZ()), new Location(signLocation.getWorld(), signLocation.getX(), signLocation.getY()+1, signLocation.getZ()+1), new Location(signLocation.getWorld(), signLocation.getX()-1, signLocation.getY()+1, signLocation.getZ()), new Location(signLocation.getWorld(), signLocation.getX(), signLocation.getY()+1, signLocation.getZ()-1), new Location(signLocation.getWorld(), signLocation.getX()+1, signLocation.getY()+1, signLocation.getZ()+1), new Location(signLocation.getWorld(), signLocation.getX()+1, signLocation.getY()+1, signLocation.getZ()-1), new Location(signLocation.getWorld(), signLocation.getX()-1, signLocation.getY()+1, signLocation.getZ()+1), new Location(signLocation.getWorld(), signLocation.getX()-1, signLocation.getY()+1, signLocation.getZ()-1) };
+        ArrayList<Block> blocks = new ArrayList<Block>();
+        for (Location loc : locations) {
+            if (loc.getBlock().getType() == Material.GLASS) {
+                blocks.add(loc.getBlock());
+            }
+        }
+        for (Block b : blocks) {
+            b.breakNaturally();
+        }
     }
 }

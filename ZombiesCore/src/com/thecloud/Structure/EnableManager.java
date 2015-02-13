@@ -19,6 +19,7 @@ public class EnableManager {
         settings.setup(plugin);
         doors.setup();
         Bukkit.getPluginManager().registerEvents(new CreateDoor(), plugin);
+        Bukkit.getPluginManager().registerEvents(new OpenDoor(), plugin);
         Bukkit.getPluginManager().registerEvents(new ChatFormat(), plugin);
         Bukkit.getPluginManager().registerEvents(new DamageHandler(), plugin);
         Bukkit.getPluginManager().registerEvents(new Restrictions(), plugin);
