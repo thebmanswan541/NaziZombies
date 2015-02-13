@@ -62,7 +62,7 @@ public class Utilities {
         double z = settings.getSpawns().getDouble("spawn.z");
         int pitch = settings.getSpawns().getInt("spawn.pitch");
         int yaw = settings.getSpawns().getInt("spawn.yaw");
-        Location l = new Location(w, x, y, z, pitch, yaw);
+        Location l = new Location(w, x, y, z, yaw, pitch);
         p.teleport(l);
     }
 
@@ -126,6 +126,7 @@ public class Utilities {
         }
         for (Block b : blocks) {
             b.breakNaturally();
+            b.getDrops().clear();
         }
     }
 }

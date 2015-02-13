@@ -39,6 +39,7 @@ public class OpenDoor implements Listener{
                                     Utilities.refreshScoreboard(pl);
                                 }
                                 Utilities.breakDoor(s.getLocation());
+                                d.setUnlocked(true);
                             } else {
                                 p.sendMessage(ChatColor.RED+"You do not have enough credits to do this.");
                             }
