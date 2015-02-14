@@ -3,6 +3,7 @@ package com.thecloud.Listeners;
 import com.thecloud.Structure.Credits;
 import com.thecloud.Structure.GameState;
 import com.thecloud.Structure.Utilities;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Zombie;
@@ -23,7 +24,7 @@ public class DamageHandler implements Listener {
             Player p = (Player) e.getDamager();
             if (e.getEntity() instanceof Zombie) {
                 Credits.addCredits(p, 10);
-                for (Player pl : StartListener.onlinePlayers) {
+                for (Player pl : Bukkit.getOnlinePlayers()) {
                     Utilities.refreshScoreboard(pl);
                 }
                 if (p.getItemInHand().getType() == Material.IRON_SWORD) {
@@ -39,7 +40,7 @@ public class DamageHandler implements Listener {
     public void onKill(EntityDeathEvent e) {
         if (e.getEntity() instanceof Zombie) {
             Credits.addCredits(e.getEntity().getKiller(), 50);
-            for (Player pl : StartListener.onlinePlayers) {
+            for (Player pl : Bukkit.getOnlinePlayers()) {
                 Utilities.refreshScoreboard(pl);
             }
         }

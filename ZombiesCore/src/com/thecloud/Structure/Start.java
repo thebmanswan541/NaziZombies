@@ -18,14 +18,16 @@ public class Start implements Runnable {
 
     public void run() {
         if (countdowntime == 30) {
+            for (Player p : Bukkit.getOnlinePlayers()) {
+                p.playSound(p.getLocation(), Sound.CLICK, 1, 1);
+            }
             Utilities.broadcast("30 seconds until the game starts!");
-        } else if (countdowntime == 10) {
-            Utilities.broadcast("10 seconds until the game starts!");
         } else if (countdowntime == 0) {
             plugin.stopCountdown();
             GameState.setGameState(GameState.IN_GAME);
-            Bukkit.getScoreboardManager().getMainScoreboard().getTeam("normal").unregister();
-            for (Player player : StartListener.onlinePlayers) {
+            Utilities.getStartBoard().getTeam("normal").unregister();
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                player.playSound(player.getLocation(), Sound.CLICK, 1, 1);
                 player.getInventory().clear();
                 Credits.setCredits(player, 500);
                 player.getInventory().addItem(Utilities.createItem(Material.IRON_SWORD, 1, ChatColor.GRAY + "Knife", null));
@@ -40,11 +42,19 @@ public class Start implements Runnable {
             Location loc = new Location(w, FileManager.getInstance().getSpawns().getDouble("spawn.x"), FileManager.getInstance().getSpawns().getDouble("spawn.y"), FileManager.getInstance().getSpawns().getDouble("spawn.z"));
             loc.getWorld().playSound(loc, Sound.CREEPER_DEATH, 1, 1);
 
-            for (Player player : StartListener.onlinePlayers) {
+            for (Player player : Bukkit.getOnlinePlayers()) {
                 Utilities.refreshScoreboard(player);
             }
-        } else if (countdowntime <= 5) {
+            return;
+        } else if (countdowntime <= 10) {
             Utilities.broadcast(countdowntime + " seconds until the game starts!");
+            for (Player p : Bukkit.getOnlinePlayers()) {
+                p.playSound(p.getLocation(), Sound.CLICK, 1, 1);
+            }
+        }
+
+        for (Player p : Bukkit.getOnlinePlayers()) {
+            Utilities.refreshStartScoreboard(p, countdowntime);
         }
 
         countdowntime--;

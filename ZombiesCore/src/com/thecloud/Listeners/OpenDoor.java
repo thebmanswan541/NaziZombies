@@ -35,7 +35,7 @@ public class OpenDoor implements Listener{
                         if (d.getLocation().equals(location)) {
                             if (Credits.getCredits(p) >= d.getCost()) {
                                 Credits.addCredits(p, -d.getCost());
-                                for (Player pl : StartListener.onlinePlayers) {
+                                for (Player pl : Bukkit.getOnlinePlayers()) {
                                     Utilities.refreshScoreboard(pl);
                                 }
                                 Utilities.breakDoor(s.getLocation());

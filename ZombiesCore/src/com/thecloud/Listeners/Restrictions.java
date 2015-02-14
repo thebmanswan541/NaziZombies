@@ -23,6 +23,7 @@ public class Restrictions implements Listener{
     @EventHandler
     public void onBreak(BlockBreakEvent e) {
         Player p = e.getPlayer();
+        e.getBlock().getDrops().clear();
         if (p.hasPermission(blockBreak)) {
             e.setCancelled(false);
         } else {
