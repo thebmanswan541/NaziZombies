@@ -5,3 +5,9 @@ commands:
     setspawn:
             description: Sets the spawn.
             usage: /<command>
+    spawnpoints:
+               description: Adds/removes spawn points.
+               usage: /<command>
+    setmap:
+          description: Sets the server's map.
+          usage: /<command>

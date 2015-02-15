@@ -16,17 +16,25 @@ public class FileManager {
         return instance;
     }
 
+    File configFile;
+    FileConfiguration config;
+
     File spawns;
     FileConfiguration spawnsConfig;
 
     File doors;
     FileConfiguration doorsConfig;
 
+    File spawnPoints;
+    FileConfiguration spConfig;
+
     public void setup(Plugin p) {
         if (!p.getDataFolder().exists()) p.getDataFolder().mkdir();
 
         spawns = new File(p.getDataFolder(), "spawn.yml");
         doors = new File(p.getDataFolder(), "doors.yml");
+        spawnPoints = new File(p.getDataFolder(), "spawnpoints.yml");
+        configFile = new File(p.getDataFolder(), "config.yml");
 
         if (!spawns.exists()) {
             try {
@@ -44,8 +52,26 @@ public class FileManager {
             }
         }
 
+        if (!spawnPoints.exists()) {
+            try {
+                spawnPoints.createNewFile();
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (!configFile.exists()) {
+            try {
+                configFile.createNewFile();
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        config = YamlConfiguration.loadConfiguration(configFile);
         spawnsConfig = YamlConfiguration.loadConfiguration(spawns);
         doorsConfig = YamlConfiguration.loadConfiguration(doors);
+        spConfig = YamlConfiguration.loadConfiguration(spawnPoints);
     }
 
     public FileConfiguration getSpawns() {
@@ -84,6 +110,30 @@ public class FileManager {
         try {
             doorsConfig.save(doors);
         }catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public FileConfiguration getSpawnPoints() {
+        return spConfig;
+    }
+
+    public void saveSpawnPoints() {
+        try {
+            spConfig.save(spawnPoints);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public FileConfiguration getConfig() {
+        return config;
+    }
+
+    public void saveConfig() {
+        try {
+            config.save(configFile);
+        } catch(Exception e) {
             e.printStackTrace();
         }
     }

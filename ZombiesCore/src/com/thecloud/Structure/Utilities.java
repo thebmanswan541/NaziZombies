@@ -1,5 +1,6 @@
 package com.thecloud.Structure;
 
+import com.thecloud.Core;
 import com.thecloud.Listeners.StartListener;
 import net.minecraft.server.v1_8_R1.*;
 import org.bukkit.*;
@@ -21,6 +22,7 @@ import java.util.List;
 public class Utilities {
 
     static FileManager settings = FileManager.getInstance();
+
 
     public static String tag() {
         return ChatColor.DARK_GRAY+"["+ChatColor.DARK_GREEN+"Zombies"+ChatColor.DARK_GRAY+"]"+ChatColor.GRAY+": ";
@@ -55,6 +57,10 @@ public class Utilities {
         }
     }
 
+    public static String getMap() {
+        return settings.getConfig().getString("map");
+    }
+
     public static void teleportToSpawn(Player p) {
         World w = Bukkit.getWorld(settings.getSpawns().getString("spawn.world"));
         double x = settings.getSpawns().getDouble("spawn.x");
@@ -68,10 +74,15 @@ public class Utilities {
 
     private static Scoreboard board;
     private static Scoreboard startBoard;
+    static int waitingID;
 
-    public static void refreshStartScoreboard(Player p, int timeLeft) {
+    public static void cancelWaiting() {
+        Bukkit.getScheduler().cancelTask(waitingID);
+    }
+
+    public static void refreshStartScoreboard(Player p, Core plugin, int timeLeft) {
         startBoard = Bukkit.getScoreboardManager().getNewScoreboard();
-        Objective o = startBoard.registerNewObjective("Starting", "dummy");
+        final Objective o = startBoard.registerNewObjective("Starting", "dummy");
         o.setDisplayName(ChatColor.RED+"Nazi "+ChatColor.DARK_GREEN+"Zombies");
         o.setDisplaySlot(DisplaySlot.SIDEBAR);
 
@@ -83,13 +94,40 @@ public class Utilities {
 
         Score s = o.getScore("§1"); s.setScore(1);
         if (Bukkit.getOnlinePlayers().size() >= 2) {
-            Score s1 = o.getScore("Starting in "+ChatColor.YELLOW+timeLeft+"s"); s1.setScore(2);
+            Score s1 = o.getScore("Starting in "+ChatColor.GREEN+timeLeft+"s");
+            s1.setScore(2);
         } else {
-            Score s1 = o.getScore("Waiting..."); s1.setScore(2);
+            waitingID = Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
+                int index = 0;
+                Score s1;
+                public void run() {
+                    index++;
+                    if (index == 1) {
+                        if (o.getScore("Waiting...") != null) {
+                            o.getScoreboard().resetScores("Waiting...");
+                        }
+                        s1 = o.getScore("Waiting");
+                        s1.setScore(2);
+                    } else if (index == 2) {
+                        o.getScoreboard().resetScores("Waiting");
+                        s1 = o.getScore("Waiting.");
+                        s1.setScore(2);
+                    } else if (index == 3) {
+                        o.getScoreboard().resetScores("Waiting.");
+                        s1 = o.getScore("Waiting..");
+                        s1.setScore(2);
+                    } else if (index == 4) {
+                        index = 0;
+                        o.getScoreboard().resetScores("Waiting..");
+                        s1 = o.getScore("Waiting...");
+                        s1.setScore(2);
+                    }
+                }
+            }, 1, 17);
         }
         Score s2 = o.getScore("§2"); s2.setScore(3);
-        Score s3 = o.getScore("Players: "+ChatColor.GREEN+Bukkit.getOnlinePlayers().size()+"/4"); s3.setScore(4);
-        Score s4 = o.getScore("Map: "+ChatColor.GREEN+"Nacht Der Untoten"); s4.setScore(5);
+        Score s3 = o.getScore("Players: "+ChatColor.GREEN+Bukkit.getOnlinePlayers().size()+Bukkit.getMaxPlayers()); s3.setScore(4);
+        Score s4 = o.getScore("Map: "+ChatColor.GREEN+getMap()); s4.setScore(5);
         Score s5 = o.getScore("§3"); s5.setScore(6);
 
         for (Player player : Bukkit.getOnlinePlayers()) {
@@ -152,11 +190,49 @@ public class Utilities {
         return startBoard;
     }
 
+    public static void startGame(Core plugin) {
+        plugin.stopCountdown();
+        GameState.setGameState(GameState.IN_GAME);
+        getStartBoard().getTeam("normal").unregister();
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            player.playSound(player.getLocation(), Sound.CLICK, 1, 1);
+            player.getInventory().clear();
+            Credits.setCredits(player, 500);
+            player.getInventory().addItem(createItem(Material.IRON_SWORD, 1, ChatColor.GRAY + "Knife", null));
+            player.getInventory().addItem(createItem(Material.WOOD_SPADE, 1, null, null));
+            player.getInventory().setItem(9, createItem(Material.WHEAT, 40, ChatColor.GRAY + "Colt M1911 Ammunition", null));
+            teleportToSpawn(player);
+            player.getInventory().setHeldItemSlot(1);
+            player.setLevel(Rounds.getRound());
+            sendTitle(player, ChatColor.RED + "Round " + Rounds.getRound(), null, 20, 60, 20);
+        }
+
+        World w = Bukkit.getWorld(FileManager.getInstance().getSpawns().getString("spawn.world"));
+        Location loc = new Location(w, FileManager.getInstance().getSpawns().getDouble("spawn.x"), FileManager.getInstance().getSpawns().getDouble("spawn.y"), FileManager.getInstance().getSpawns().getDouble("spawn.z"));
+        loc.getWorld().playSound(loc, Sound.CREEPER_DEATH, 1, 1);
+
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            refreshScoreboard(player);
+        }
+
+        Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+            public void run() {
+                if (Bukkit.getOnlinePlayers().size() <= 4) {
+                    for (Location loc : SpawnPoint.getNachtRoom1()) {
+                        ZombieManager.createZombieSpawnChain(loc, 2, 150D, 0.207);
+                    }
+                } else {
+
+                }
+            }
+        }, 200);
+    }
+
     public static void breakDoor(Location signLocation) {
         Location[] locations = new Location[] { new Location(signLocation.getWorld(), signLocation.getX()+1, signLocation.getY(), signLocation.getZ()), new Location(signLocation.getWorld(), signLocation.getX()-1, signLocation.getY(), signLocation.getZ()), new Location(signLocation.getWorld(), signLocation.getX(), signLocation.getY(), signLocation.getZ()+1), new Location(signLocation.getWorld(), signLocation.getX(), signLocation.getY(), signLocation.getZ()-1), new Location(signLocation.getWorld(), signLocation.getX()+1, signLocation.getY(), signLocation.getZ()+1), new Location(signLocation.getWorld(), signLocation.getX()-1, signLocation.getY(), signLocation.getZ()+1), new Location(signLocation.getWorld(), signLocation.getX()+1, signLocation.getY(), signLocation.getZ()-1), new Location(signLocation.getWorld(), signLocation.getX()-1, signLocation.getY(), signLocation.getZ()-1), new Location(signLocation.getWorld(), signLocation.getX()+1, signLocation.getY()+1, signLocation.getZ()), new Location(signLocation.getWorld(), signLocation.getX(), signLocation.getY()+1, signLocation.getZ()+1), new Location(signLocation.getWorld(), signLocation.getX()-1, signLocation.getY()+1, signLocation.getZ()), new Location(signLocation.getWorld(), signLocation.getX(), signLocation.getY()+1, signLocation.getZ()-1), new Location(signLocation.getWorld(), signLocation.getX()+1, signLocation.getY()+1, signLocation.getZ()+1), new Location(signLocation.getWorld(), signLocation.getX()+1, signLocation.getY()+1, signLocation.getZ()-1), new Location(signLocation.getWorld(), signLocation.getX()-1, signLocation.getY()+1, signLocation.getZ()+1), new Location(signLocation.getWorld(), signLocation.getX()-1, signLocation.getY()+1, signLocation.getZ()-1), new Location(signLocation.getWorld(), signLocation.getX()+1, signLocation.getY()+2, signLocation.getZ()), new Location(signLocation.getWorld(), signLocation.getX(), signLocation.getY()+2, signLocation.getZ()+1), new Location(signLocation.getWorld(), signLocation.getX()-1, signLocation.getY()+2, signLocation.getZ()), new Location(signLocation.getWorld(), signLocation.getX(), signLocation.getY()+2, signLocation.getZ()-1), new Location(signLocation.getWorld(), signLocation.getX()+1, signLocation.getY()+2, signLocation.getZ()+1), new Location(signLocation.getWorld(), signLocation.getX()+1, signLocation.getY()+2, signLocation.getZ()-1), new Location(signLocation.getWorld(), signLocation.getX()-1, signLocation.getY()+2, signLocation.getZ()+1), new Location(signLocation.getWorld(), signLocation.getX()-1, signLocation.getY()+2, signLocation.getZ()-1), new Location(signLocation.getWorld(), signLocation.getX()+1, signLocation.getY()-1, signLocation.getZ()), new Location(signLocation.getWorld(), signLocation.getX(), signLocation.getY()-1, signLocation.getZ()+1), new Location(signLocation.getWorld(), signLocation.getX()-1, signLocation.getY()-1, signLocation.getZ()), new Location(signLocation.getWorld(), signLocation.getX(), signLocation.getY()-1, signLocation.getZ()-1), new Location(signLocation.getWorld(), signLocation.getX()+1, signLocation.getY()-1, signLocation.getZ()+1), new Location(signLocation.getWorld(), signLocation.getX()+1, signLocation.getY()-1, signLocation.getZ()-1), new Location(signLocation.getWorld(), signLocation.getX()-1, signLocation.getY()-1, signLocation.getZ()+1), new Location(signLocation.getWorld(), signLocation.getX()-1, signLocation.getY()-1, signLocation.getZ()-1) };
         ArrayList<Block> blocks = new ArrayList<Block>();
         for (Location loc : locations) {
-            if (loc.getBlock().getType() == Material.GLASS) {
+            if (loc.getBlock().getType() == Material.STAINED_GLASS) {
                 blocks.add(loc.getBlock());
             }
         }

@@ -1,6 +1,7 @@
 package com.thecloud.Listeners;
 
 import com.thecloud.Structure.GameState;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
@@ -11,7 +12,10 @@ import org.bukkit.event.entity.*;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.permissions.Permission;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 public class Restrictions implements Listener{
 
@@ -95,6 +99,24 @@ public class Restrictions implements Listener{
     public void onDeath(EntityDeathEvent e) {
         e.getDrops().clear();
         e.setDroppedExp(0);
+    }
+
+    @EventHandler
+    public void onHold(PlayerItemHeldEvent e) {
+        Player p = e.getPlayer();
+        if (p.getInventory().getItem(e.getNewSlot()) != null) {
+            if (p.getInventory().getItem(e.getNewSlot()).getType() == Material.IRON_SWORD) {
+                p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 1000000000, 3));
+            } else {
+                if (p.hasPotionEffect(PotionEffectType.SLOW_DIGGING)) {
+                    p.removePotionEffect(PotionEffectType.SLOW_DIGGING);
+                }
+            }
+        } else {
+            if (p.hasPotionEffect(PotionEffectType.SLOW_DIGGING)) {
+                p.removePotionEffect(PotionEffectType.SLOW_DIGGING);
+            }
+        }
     }
 
 }

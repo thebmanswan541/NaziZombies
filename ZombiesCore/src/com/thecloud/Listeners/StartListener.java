@@ -32,7 +32,12 @@ public class StartListener implements Listener {
 
         Player p = e.getPlayer();
 
-        Utilities.refreshStartScoreboard(p, 0);
+        p.getInventory().clear();
+        p.setLevel(0);
+        p.setExp(0);
+        p.getActivePotionEffects().clear();
+
+        Utilities.refreshStartScoreboard(p, plugin, 0);
 
         p.setGameMode(GameMode.ADVENTURE);
 
@@ -43,21 +48,30 @@ public class StartListener implements Listener {
             for (Player pl : Bukkit.getOnlinePlayers()) {
                 pl.playSound(pl.getLocation(), Sound.CLICK, 1, 1);
             }
+            Utilities.cancelWaiting();
             plugin.startCountdown();
         }
     }
 
     @EventHandler
     public void onLeave(PlayerQuitEvent e) {
-        Player p = e.getPlayer();
+        final Player p = e.getPlayer();
 
         if (GameState.isState(GameState.IN_LOBBY)) {
             Utilities.getStartBoard().getTeam("normal").removePlayer(p);
-            if (Bukkit.getOnlinePlayers().size() < 2) {
-                Utilities.broadcast("Game start cancelled.");
-                Utilities.refreshStartScoreboard(p, 0);
-                Start.countdowntime = 60;
-                plugin.stopCountdown();
+            if (Start.countdowntime < 60) {
+                if (Bukkit.getOnlinePlayers().size() - 1 <= 1) {
+                    Utilities.broadcast("Game start cancelled.");
+                    Start.countdowntime = 60;
+                    plugin.stopCountdown();
+                    Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+                        public void run() {
+                            for (Player player : Bukkit.getOnlinePlayers()) {
+                                Utilities.refreshStartScoreboard(player, plugin, 0);
+                            }
+                        }
+                    }, 1);
+                }
             }
         }
     }

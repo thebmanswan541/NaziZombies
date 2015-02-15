@@ -12,8 +12,8 @@ public class ChatFormat implements Listener{
     @EventHandler
     public void onChat(AsyncPlayerChatEvent e) {
         Player p = e.getPlayer();
-        if (Bukkit.getScoreboardManager().getMainScoreboard().getPlayerTeam(p) != null) {
-            e.setFormat(Bukkit.getScoreboardManager().getMainScoreboard().getPlayerTeam(p).getPrefix() + p.getDisplayName() + ChatColor.GRAY+": " + ChatColor.RESET + e.getMessage());
+        if (Utilities.getStartBoard().getPlayerTeam(p) != null) {
+            e.setFormat(Utilities.getStartBoard().getPlayerTeam(p).getPrefix() + p.getDisplayName() + ChatColor.GRAY+": " + ChatColor.RESET + e.getMessage());
         } else {
             e.setFormat(Utilities.getBoard().getPlayerTeam(p).getPrefix()+p.getDisplayName()+ChatColor.GRAY+": "+ChatColor.RESET+e.getMessage());
         }

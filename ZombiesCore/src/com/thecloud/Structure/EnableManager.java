@@ -1,6 +1,8 @@
 package com.thecloud.Structure;
 
+import com.thecloud.Commands.SetMap;
 import com.thecloud.Commands.SetSpawn;
+import com.thecloud.Commands.SpawnPoints;
 import com.thecloud.Core;
 import com.thecloud.Listeners.*;
 import org.bukkit.Bukkit;
@@ -30,6 +32,8 @@ public class EnableManager {
         Bukkit.getPluginManager().addPermission(Restrictions.blockBreak);
         Bukkit.getPluginManager().addPermission(Restrictions.blockPlace);
         plugin.getCommand("setspawn").setExecutor(new SetSpawn());
+        plugin.getCommand("spawnpoints").setExecutor(new SpawnPoints());
+        plugin.getCommand("setmap").setExecutor(new SetMap());
     }
 
 }

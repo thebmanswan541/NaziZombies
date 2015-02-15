@@ -12,8 +12,10 @@ public class Core extends JavaPlugin {
     public void onEnable() {
         GameState.setGameState(GameState.IN_LOBBY);
         manager.setup(this);
+        for (Door d : DoorManager.getInstance().getDoors()) {
+            d.setUnlocked(false);
+        }
     }
-
     public void startCountdown() {
         countdownID = Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Start(this), 0, 20);
     }
