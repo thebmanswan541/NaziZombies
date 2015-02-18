@@ -2,6 +2,7 @@ package com.thecloud.Listeners;
 
 import com.avaje.ebeaninternal.server.deploy.BeanDescriptor;
 import com.thecloud.Core;
+import com.thecloud.NachtDerUntoten.SpawnManager;
 import com.thecloud.Structure.*;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
@@ -43,66 +44,13 @@ public class RoundListener implements Listener{
                             Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                                 public void run() {
                                     if (Rounds.getRound() == 2) {
-                                        if (SpawnPoint.getNachtDoor1().isUnlocked()) {
-                                            if (Bukkit.getOnlinePlayers().size() <= 4) {
-                                                for (Location location : SpawnPoint.getNachtRoom1()) {
-                                                    ZombieManager.createZombieSpawnChain(location, 2, 250D, 0.207);
-                                                }
-                                                for (Location location : SpawnPoint.getNachtRoom2()) {
-                                                    ZombieManager.createZombieSpawnChain(location, 2, 250D, 0.207);
-                                                }
-                                                Location loc = SpawnPoint.getNachtRoom1()[1];
-                                                for(Entity en : loc.getWorld().getEntities()) {
-                                                    if (en instanceof Zombie) {
-                                                        en.remove();
-                                                        break;
-                                                    }
-                                                }
-                                            }
-                                        } else if (SpawnPoint.getNachtDoor2().isUnlocked()) {
-                                            if (Bukkit.getOnlinePlayers().size() <= 4) {
-                                                for (Location location : SpawnPoint.getNachtRoom1()) {
-                                                    ZombieManager.createZombieSpawnChain(location, 2, 250D, 0.207);
-                                                }
-                                                for (Location location : SpawnPoint.getNachtRoom3()) {
-                                                    ZombieManager.createZombieSpawnChain(location, 2, 250D, 0.207);
-                                                }
-                                                Location loc = SpawnPoint.getNachtRoom1()[1];
-                                                int index = 0;
-                                                for(Entity en : loc.getWorld().getEntities()) {
-                                                    if (en instanceof Zombie) {
-                                                        if (index == 2) break;
-                                                        en.remove();
-                                                        index++;
-                                                    }
-                                                }
-                                            }
-                                        } else if (SpawnPoint.getNachtDoor2().isUnlocked() && SpawnPoint.getNachtDoor1().isUnlocked() || SpawnPoint.getNachtDoor2().isUnlocked() && SpawnPoint.getNachtDoor3().isUnlocked()) {
-                                            if (Bukkit.getOnlinePlayers().size() <= 4) {
-                                                for (Location location : SpawnPoint.getNachtRoom1()) {
-                                                    ZombieManager.createZombieSpawnChain(location, 2, 250D, 0.207);
-                                                }
-                                                for (Location location : SpawnPoint.getNachtRoom2()) {
-                                                    ZombieManager.createZombieSpawnChain(location, 2, 250D, 0.207);
-                                                }
-                                                for (Location location : SpawnPoint.getNachtRoom3()) {
-                                                    ZombieManager.createZombieSpawnChain(location, 2, 250D, 0.207);
-                                                }
-                                                Location loc = SpawnPoint.getNachtRoom1()[1];
-                                                int index = 0;
-                                                for(Entity en : loc.getWorld().getEntities()) {
-                                                    if (en instanceof Zombie) {
-                                                        if (index == 9) break;
-                                                        en.remove();
-                                                        index++;
-                                                    }
-                                                }
-                                            }
-                                        } else {
-                                            for (Location location : SpawnPoint.getNachtRoom1()) {
-                                                ZombieManager.createZombieSpawnChain(location, 3, 250D, 0.207);
-                                            }
-                                        }
+                                        SpawnManager.spawnRound2();
+                                    } else if (Rounds.getRound() == 3) {
+                                        SpawnManager.spawnRound3();
+                                    } else if (Rounds.getRound() == 4) {
+                                        SpawnManager.spawnRound4();
+                                    } else if (Rounds.getRound() == 5) {
+                                        SpawnManager.spawnRound5();
                                     }
                                 }
                             }, 200);

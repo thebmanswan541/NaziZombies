@@ -2,13 +2,16 @@ package com.thecloud.Structure;
 
 import com.thecloud.Core;
 import com.thecloud.Listeners.StartListener;
+import com.thecloud.NachtDerUntoten.SpawnManager;
 import net.minecraft.server.v1_8_R1.*;
 import org.bukkit.*;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.*;
 import org.bukkit.block.Block;
+import org.bukkit.craftbukkit.v1_8_R1.entity.CraftLivingEntity;
 import org.bukkit.craftbukkit.v1_8_R1.entity.CraftPlayer;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Zombie;
 import org.bukkit.inventory.ItemStack;
@@ -61,15 +64,18 @@ public class Utilities {
         return settings.getConfig().getString("map");
     }
 
-    public static void teleportToSpawn(Player p) {
+    public static Location getSpawn() {
         World w = Bukkit.getWorld(settings.getSpawns().getString("spawn.world"));
         double x = settings.getSpawns().getDouble("spawn.x");
         double y = settings.getSpawns().getDouble("spawn.y");
         double z = settings.getSpawns().getDouble("spawn.z");
         int pitch = settings.getSpawns().getInt("spawn.pitch");
         int yaw = settings.getSpawns().getInt("spawn.yaw");
-        Location l = new Location(w, x, y, z, yaw, pitch);
-        p.teleport(l);
+        return new Location(w, x, y, z, yaw, pitch);
+    }
+
+    public static void teleportToSpawn(Player p) {
+        p.teleport(getSpawn());
     }
 
     private static Scoreboard board;
@@ -126,7 +132,7 @@ public class Utilities {
             }, 1, 17);
         }
         Score s2 = o.getScore("§2"); s2.setScore(3);
-        Score s3 = o.getScore("Players: "+ChatColor.GREEN+Bukkit.getOnlinePlayers().size()+Bukkit.getMaxPlayers()); s3.setScore(4);
+        Score s3 = o.getScore("Players: "+ChatColor.GREEN+Bukkit.getOnlinePlayers().size()+"/"+Bukkit.getMaxPlayers()); s3.setScore(4);
         Score s4 = o.getScore("Map: "+ChatColor.GREEN+getMap()); s4.setScore(5);
         Score s5 = o.getScore("§3"); s5.setScore(6);
 
@@ -214,18 +220,13 @@ public class Utilities {
         for (Player player : Bukkit.getOnlinePlayers()) {
             refreshScoreboard(player);
         }
-
-        Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-            public void run() {
-                if (Bukkit.getOnlinePlayers().size() <= 4) {
-                    for (Location loc : SpawnPoint.getNachtRoom1()) {
-                        ZombieManager.createZombieSpawnChain(loc, 2, 150D, 0.207);
-                    }
-                } else {
-
+        if (getMap().equals("Nacht Der Untoten")) {
+            Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+                public void run() {
+                    SpawnManager.spawnRound1();
                 }
-            }
-        }, 200);
+            }, 200);
+        }
     }
 
     public static void breakDoor(Location signLocation) {
@@ -241,4 +242,5 @@ public class Utilities {
             b.setType(Material.AIR);
         }
     }
+
 }

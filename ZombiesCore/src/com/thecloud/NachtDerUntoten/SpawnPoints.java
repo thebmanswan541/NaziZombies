@@ -1,10 +1,13 @@
-package com.thecloud.Structure;
+package com.thecloud.NachtDerUntoten;
 
+import com.thecloud.Structure.Door;
+import com.thecloud.Structure.DoorManager;
+import com.thecloud.Structure.FileManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 
-public class SpawnPoint {
+public class SpawnPoints {
 
     static FileManager settings = FileManager.getInstance();
 
@@ -45,4 +48,5 @@ public class SpawnPoint {
         Door d = DoorManager.getInstance().getDoor("Nacht3");
         return d;
     }
+
 }
