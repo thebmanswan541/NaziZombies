@@ -1,19 +1,14 @@
 package com.thecloud.Structure;
 
 import com.thecloud.Core;
-import com.thecloud.Listeners.StartListener;
-import com.thecloud.NachtDerUntoten.SpawnManager;
+import com.thecloud.NachtDerUntoten.NachtSpawnManager;
 import net.minecraft.server.v1_8_R1.*;
 import org.bukkit.*;
 import org.bukkit.Material;
 import org.bukkit.World;
-import org.bukkit.block.*;
 import org.bukkit.block.Block;
-import org.bukkit.craftbukkit.v1_8_R1.entity.CraftLivingEntity;
 import org.bukkit.craftbukkit.v1_8_R1.entity.CraftPlayer;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Zombie;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scoreboard.*;
@@ -223,7 +218,7 @@ public class Utilities {
         if (getMap().equals("Nacht Der Untoten")) {
             Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                 public void run() {
-                    SpawnManager.spawnRound1();
+                    NachtSpawnManager.spawnRound1();
                 }
             }, 200);
         }

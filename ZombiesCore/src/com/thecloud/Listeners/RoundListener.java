@@ -1,17 +1,13 @@
 package com.thecloud.Listeners;
 
-import com.avaje.ebeaninternal.server.deploy.BeanDescriptor;
 import com.thecloud.Core;
-import com.thecloud.NachtDerUntoten.SpawnManager;
+import com.thecloud.NachtDerUntoten.NachtSpawnManager;
 import com.thecloud.Structure.*;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.Sound;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
@@ -44,17 +40,23 @@ public class RoundListener implements Listener{
                             Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                                 public void run() {
                                     if (Rounds.getRound() == 2) {
-                                        SpawnManager.spawnRound2();
+                                        NachtSpawnManager.spawnRound2();
                                     } else if (Rounds.getRound() == 3) {
-                                        SpawnManager.spawnRound3();
+                                        NachtSpawnManager.spawnRound3();
                                     } else if (Rounds.getRound() == 4) {
-                                        SpawnManager.spawnRound4();
+                                        NachtSpawnManager.spawnRound4();
                                     } else if (Rounds.getRound() == 5) {
-                                        SpawnManager.spawnRound5();
+                                        NachtSpawnManager.spawnRound5();
                                     } else if (Rounds.getRound() == 6) {
-                                        SpawnManager.spawnRound6();
+                                        NachtSpawnManager.spawnRound6();
                                     } else if (Rounds.getRound() == 7) {
-                                        SpawnManager.spawnRound7();
+                                        NachtSpawnManager.spawnRound7();
+                                    } else if (Rounds.getRound() == 8) {
+                                        NachtSpawnManager.spawnRound8();
+                                    } else if (Rounds.getRound() == 9) {
+                                        NachtSpawnManager.spawnRound9();
+                                    } else if (Rounds.getRound() == 10) {
+                                        NachtSpawnManager.spawnRound10();
                                     }
                                 }
                             }, 200);
