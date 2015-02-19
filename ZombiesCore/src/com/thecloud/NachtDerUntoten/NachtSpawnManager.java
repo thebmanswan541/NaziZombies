@@ -660,4 +660,55 @@ public class NachtSpawnManager {
             }
         }
     }
+
+    public static void spawnRound11() {
+        if (NachtSpawnPoints.getNachtDoor1().isUnlocked()) {
+            if (Bukkit.getOnlinePlayers().size() <= 4) {
+                for (Location location : NachtSpawnPoints.getNachtRoom1()) {
+                    ZombieManager.createZombieSpawnChain(location, 6, 1150D, 0.322);
+                }
+                for (Location location : NachtSpawnPoints.getNachtRoom2()) {
+                    ZombieManager.createZombieSpawnChain(location, 8, 1150D, 0.322);
+                }
+            } else {
+
+            }
+        } else if (NachtSpawnPoints.getNachtDoor2().isUnlocked()) {
+            if (Bukkit.getOnlinePlayers().size() <= 4) {
+                for (Location location : NachtSpawnPoints.getNachtRoom1()) {
+                    ZombieManager.createZombieSpawnChain(location, 5, 1150D, 0.322);
+                }
+                for (Location location : NachtSpawnPoints.getNachtRoom3()) {
+                    ZombieManager.createZombieSpawnChain(location, 7, 1150D, 0.322);
+                }
+                Location loc = NachtSpawnPoints.getNachtRoom1()[1];
+                int index = 0;
+                for (Entity en : loc.getWorld().getEntities()) {
+                    if (en instanceof Zombie) {
+                        if (index == 3) break;
+                        en.remove();
+                        index++;
+                    }
+                }
+            }
+        } else if (NachtSpawnPoints.getNachtDoor2().isUnlocked() && NachtSpawnPoints.getNachtDoor1().isUnlocked() || NachtSpawnPoints.getNachtDoor2().isUnlocked() && NachtSpawnPoints.getNachtDoor3().isUnlocked()) {
+            if (Bukkit.getOnlinePlayers().size() <= 4) {
+                for (Location location : NachtSpawnPoints.getNachtRoom1()) {
+                    ZombieManager.createZombieSpawnChain(location, 4, 1150D, 0.322);
+                }
+                for (Location location : NachtSpawnPoints.getNachtRoom2()) {
+                    ZombieManager.createZombieSpawnChain(location, 5, 1150D, 0.322);
+                }
+                for (Location location : NachtSpawnPoints.getNachtRoom3()) {
+                    ZombieManager.createZombieSpawnChain(location, 4, 1150D, 0.322);
+                }
+            } else {
+
+            }
+        } else {
+            for (Location location : NachtSpawnPoints.getNachtRoom1()) {
+                ZombieManager.createZombieSpawnChain(location, 10, 1150D, 0.322);
+            }
+        }
+    }
 }
