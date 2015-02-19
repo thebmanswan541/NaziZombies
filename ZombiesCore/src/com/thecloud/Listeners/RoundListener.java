@@ -51,6 +51,10 @@ public class RoundListener implements Listener{
                                         SpawnManager.spawnRound4();
                                     } else if (Rounds.getRound() == 5) {
                                         SpawnManager.spawnRound5();
+                                    } else if (Rounds.getRound() == 6) {
+                                        SpawnManager.spawnRound6();
+                                    } else if (Rounds.getRound() == 7) {
+                                        SpawnManager.spawnRound7();
                                     }
                                 }
                             }, 200);

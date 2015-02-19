@@ -29,7 +29,7 @@ public class SpawnManager {
                     ZombieManager.createZombieSpawnChain(location, 2, 250D, 0.207);
                 }
                 Location loc = SpawnPoints.getNachtRoom1()[1];
-                for(Entity en : loc.getWorld().getEntities()) {
+                for (Entity en : loc.getWorld().getEntities()) {
                     if (en instanceof Zombie) {
                         en.remove();
                         break;
@@ -71,7 +71,7 @@ public class SpawnManager {
                 }
                 Location loc = SpawnPoints.getNachtRoom1()[1];
                 int index = 0;
-                for(Entity en : loc.getWorld().getEntities()) {
+                for (Entity en : loc.getWorld().getEntities()) {
                     if (en instanceof Zombie) {
                         if (index == 9) break;
                         en.remove();
@@ -99,7 +99,7 @@ public class SpawnManager {
                 }
                 Location loc = SpawnPoints.getNachtRoom1()[1];
                 int index = 0;
-                for(Entity en : loc.getWorld().getEntities()) {
+                for (Entity en : loc.getWorld().getEntities()) {
                     if (en instanceof Zombie) {
                         if (index == 4) break;
                         en.remove();
@@ -119,7 +119,7 @@ public class SpawnManager {
                 }
                 Location loc = SpawnPoints.getNachtRoom1()[1];
                 int index = 0;
-                for(Entity en : loc.getWorld().getEntities()) {
+                for (Entity en : loc.getWorld().getEntities()) {
                     if (en instanceof Zombie) {
                         if (index == 2) break;
                         en.remove();
@@ -140,7 +140,7 @@ public class SpawnManager {
                 }
                 Location loc = SpawnPoints.getNachtRoom1()[1];
                 int index = 0;
-                for(Entity en : loc.getWorld().getEntities()) {
+                for (Entity en : loc.getWorld().getEntities()) {
                     if (en instanceof Zombie) {
                         if (index == 4) break;
                         en.remove();
@@ -168,7 +168,7 @@ public class SpawnManager {
                 }
                 Location loc = SpawnPoints.getNachtRoom1()[1];
                 int index = 0;
-                for(Entity en : loc.getWorld().getEntities()) {
+                for (Entity en : loc.getWorld().getEntities()) {
                     if (en instanceof Zombie) {
                         if (index == 3) break;
                         en.remove();
@@ -188,7 +188,7 @@ public class SpawnManager {
                 }
                 Location loc = SpawnPoints.getNachtRoom1()[1];
                 int index = 0;
-                for(Entity en : loc.getWorld().getEntities()) {
+                for (Entity en : loc.getWorld().getEntities()) {
                     if (en instanceof Zombie) {
                         if (index == 2) break;
                         en.remove();
@@ -209,7 +209,7 @@ public class SpawnManager {
                 }
                 Location loc = SpawnPoints.getNachtRoom1()[1];
                 int index = 0;
-                for(Entity en : loc.getWorld().getEntities()) {
+                for (Entity en : loc.getWorld().getEntities()) {
                     if (en instanceof Zombie) {
                         if (index == 2) break;
                         en.remove();
@@ -244,11 +244,11 @@ public class SpawnManager {
                     ZombieManager.createZombieSpawnChain(location, 3, 550D, 0.23);
                 }
                 for (Location location : SpawnPoints.getNachtRoom3()) {
-                    ZombieManager.createZombieSpawnChain(location, 3, 550D, 0.23);
+                    ZombieManager.createZombieSpawnChain(location, 4, 550D, 0.23);
                 }
                 Location loc = SpawnPoints.getNachtRoom1()[1];
                 int index = 0;
-                for(Entity en : loc.getWorld().getEntities()) {
+                for (Entity en : loc.getWorld().getEntities()) {
                     if (en instanceof Zombie) {
                         if (index == 2) break;
                         en.remove();
@@ -265,11 +265,11 @@ public class SpawnManager {
                     ZombieManager.createZombieSpawnChain(location, 3, 550D, 0.23);
                 }
                 for (Location location : SpawnPoints.getNachtRoom3()) {
-                    ZombieManager.createZombieSpawnChain(location, 2, 550D, 0.23);
+                    ZombieManager.createZombieSpawnChain(location, 3, 550D, 0.23);
                 }
                 Location loc = SpawnPoints.getNachtRoom1()[1];
                 int index = 0;
-                for(Entity en : loc.getWorld().getEntities()) {
+                for (Entity en : loc.getWorld().getEntities()) {
                     if (en instanceof Zombie) {
                         if (index == 2) break;
                         en.remove();
@@ -281,10 +281,259 @@ public class SpawnManager {
             }
         } else {
             for (Location location : SpawnPoints.getNachtRoom1()) {
-                ZombieManager.createZombieSpawnChain(location, 5, 550D, 0.23);
+                ZombieManager.createZombieSpawnChain(location, 6, 550D, 0.23);
+            }
+            Location loc = SpawnPoints.getNachtRoom1()[1];
+            int index = 0;
+            for (Entity en : loc.getWorld().getEntities()) {
+                if (en instanceof Zombie) {
+                    if (index == 1) break;
+                    en.remove();
+                    index++;
+                }
             }
         }
+
+
     }
 
+    public static void spawnRound6() {
+        if (SpawnPoints.getNachtDoor1().isUnlocked()) {
+            if (Bukkit.getOnlinePlayers().size() <= 4) {
+                for (Location location : SpawnPoints.getNachtRoom1()) {
+                    ZombieManager.createZombieSpawnChain(location, 4, 650D, 0.23);
+                }
+                for (Location location : SpawnPoints.getNachtRoom2()) {
+                    ZombieManager.createZombieSpawnChain(location, 5, 650D, 0.23);
+                }
+                Location loc = SpawnPoints.getNachtRoom1()[1];
+                int index = 0;
+                for (Entity en : loc.getWorld().getEntities()) {
+                    if (en instanceof Zombie) {
+                        if (index == 1) break;
+                        en.remove();
+                        index++;
+                    }
+                }
+            } else {
 
+            }
+        } else if (SpawnPoints.getNachtDoor2().isUnlocked()) {
+            if (Bukkit.getOnlinePlayers().size() <= 4) {
+                for (Location location : SpawnPoints.getNachtRoom1()) {
+                    ZombieManager.createZombieSpawnChain(location, 4, 650D, 0.23);
+                }
+                for (Location location : SpawnPoints.getNachtRoom3()) {
+                    ZombieManager.createZombieSpawnChain(location, 4, 650D, 0.23);
+                }
+                Location loc = SpawnPoints.getNachtRoom1()[1];
+                int index = 0;
+                for (Entity en : loc.getWorld().getEntities()) {
+                    if (en instanceof Zombie) {
+                        if (index == 2) break;
+                        en.remove();
+                        index++;
+                    }
+                }
+            }
+        } else if (SpawnPoints.getNachtDoor2().isUnlocked() && SpawnPoints.getNachtDoor1().isUnlocked() || SpawnPoints.getNachtDoor2().isUnlocked() && SpawnPoints.getNachtDoor3().isUnlocked()) {
+            if (Bukkit.getOnlinePlayers().size() <= 4) {
+                for (Location location : SpawnPoints.getNachtRoom1()) {
+                    ZombieManager.createZombieSpawnChain(location, 3, 650D, 0.23);
+                }
+                for (Location location : SpawnPoints.getNachtRoom2()) {
+                    ZombieManager.createZombieSpawnChain(location, 3, 650D, 0.23);
+                }
+                for (Location location : SpawnPoints.getNachtRoom3()) {
+                    ZombieManager.createZombieSpawnChain(location, 3, 650D, 0.23);
+                }
+                Location loc = SpawnPoints.getNachtRoom1()[1];
+                int index = 0;
+                for (Entity en : loc.getWorld().getEntities()) {
+                    if (en instanceof Zombie) {
+                        if (index == 2) break;
+                        en.remove();
+                        index++;
+                    }
+                }
+            } else {
+
+            }
+        } else {
+            for (Location location : SpawnPoints.getNachtRoom1()) {
+                ZombieManager.createZombieSpawnChain(location, 7, 650D, 0.23);
+            }
+            Location loc = SpawnPoints.getNachtRoom1()[1];
+            int index = 0;
+            for (Entity en : loc.getWorld().getEntities()) {
+                if (en instanceof Zombie) {
+                    if (index == 1) break;
+                    en.remove();
+                    index++;
+                }
+            }
+        }
+
+
+    }
+
+    public static void spawnRound8() {
+        if (SpawnPoints.getNachtDoor1().isUnlocked()) {
+            if (Bukkit.getOnlinePlayers().size() <= 4) {
+                for (Location location : SpawnPoints.getNachtRoom1()) {
+                    ZombieManager.createZombieSpawnChain(location, 5, 750D, 0.23);
+                }
+                for (Location location : SpawnPoints.getNachtRoom2()) {
+                    ZombieManager.createZombieSpawnChain(location, 5, 750D, 0.23);
+                }
+                Location loc = SpawnPoints.getNachtRoom1()[1];
+                int index = 0;
+                for (Entity en : loc.getWorld().getEntities()) {
+                    if (en instanceof Zombie) {
+                        if (index == 2) break;
+                        en.remove();
+                        index++;
+                    }
+                }
+            } else {
+
+            }
+        } else if (SpawnPoints.getNachtDoor2().isUnlocked()) {
+            if (Bukkit.getOnlinePlayers().size() <= 4) {
+                for (Location location : SpawnPoints.getNachtRoom1()) {
+                    ZombieManager.createZombieSpawnChain(location, 5, 750D, 0.23);
+                }
+                for (Location location : SpawnPoints.getNachtRoom3()) {
+                    ZombieManager.createZombieSpawnChain(location, 4, 750D, 0.23);
+                }
+                Location loc = SpawnPoints.getNachtRoom1()[1];
+                int index = 0;
+                for (Entity en : loc.getWorld().getEntities()) {
+                    if (en instanceof Zombie) {
+                        if (index == 3) break;
+                        en.remove();
+                        index++;
+                    }
+                }
+            }
+        } else if (SpawnPoints.getNachtDoor2().isUnlocked() && SpawnPoints.getNachtDoor1().isUnlocked() || SpawnPoints.getNachtDoor2().isUnlocked() && SpawnPoints.getNachtDoor3().isUnlocked()) {
+            if (Bukkit.getOnlinePlayers().size() <= 4) {
+                for (Location location : SpawnPoints.getNachtRoom1()) {
+                    ZombieManager.createZombieSpawnChain(location, 3, 750D, 0.23);
+                }
+                for (Location location : SpawnPoints.getNachtRoom2()) {
+                    ZombieManager.createZombieSpawnChain(location, 4, 750D, 0.23);
+                }
+                for (Location location : SpawnPoints.getNachtRoom3()) {
+                    ZombieManager.createZombieSpawnChain(location, 3, 750D, 0.23);
+                }
+                Location loc = SpawnPoints.getNachtRoom1()[1];
+                int index = 0;
+                for (Entity en : loc.getWorld().getEntities()) {
+                    if (en instanceof Zombie) {
+                        if (index == 1) break;
+                        en.remove();
+                        index++;
+                    }
+                }
+            } else {
+
+            }
+        } else {
+            for (Location location : SpawnPoints.getNachtRoom1()) {
+                ZombieManager.createZombieSpawnChain(location, 8, 750D, 0.23);
+            }
+            Location loc = SpawnPoints.getNachtRoom1()[1];
+            int index = 0;
+            for (Entity en : loc.getWorld().getEntities()) {
+                if (en instanceof Zombie) {
+                    if (index == 2) break;
+                    en.remove();
+                    index++;
+                }
+            }
+        }
+
+
+    }
+
+    public static void spawnRound7() {
+        if (SpawnPoints.getNachtDoor1().isUnlocked()) {
+            if (Bukkit.getOnlinePlayers().size() <= 4) {
+                for (Location location : SpawnPoints.getNachtRoom1()) {
+                    ZombieManager.createZombieSpawnChain(location, 5, 750D, 0.23);
+                }
+                for (Location location : SpawnPoints.getNachtRoom2()) {
+                    ZombieManager.createZombieSpawnChain(location, 5, 750D, 0.23);
+                }
+                Location loc = SpawnPoints.getNachtRoom1()[1];
+                int index = 0;
+                for (Entity en : loc.getWorld().getEntities()) {
+                    if (en instanceof Zombie) {
+                        if (index == 2) break;
+                        en.remove();
+                        index++;
+                    }
+                }
+            } else {
+
+            }
+        } else if (SpawnPoints.getNachtDoor2().isUnlocked()) {
+            if (Bukkit.getOnlinePlayers().size() <= 4) {
+                for (Location location : SpawnPoints.getNachtRoom1()) {
+                    ZombieManager.createZombieSpawnChain(location, 5, 750D, 0.23);
+                }
+                for (Location location : SpawnPoints.getNachtRoom3()) {
+                    ZombieManager.createZombieSpawnChain(location, 4, 750D, 0.23);
+                }
+                Location loc = SpawnPoints.getNachtRoom1()[1];
+                int index = 0;
+                for (Entity en : loc.getWorld().getEntities()) {
+                    if (en instanceof Zombie) {
+                        if (index == 3) break;
+                        en.remove();
+                        index++;
+                    }
+                }
+            }
+        } else if (SpawnPoints.getNachtDoor2().isUnlocked() && SpawnPoints.getNachtDoor1().isUnlocked() || SpawnPoints.getNachtDoor2().isUnlocked() && SpawnPoints.getNachtDoor3().isUnlocked()) {
+            if (Bukkit.getOnlinePlayers().size() <= 4) {
+                for (Location location : SpawnPoints.getNachtRoom1()) {
+                    ZombieManager.createZombieSpawnChain(location, 3, 750D, 0.23);
+                }
+                for (Location location : SpawnPoints.getNachtRoom2()) {
+                    ZombieManager.createZombieSpawnChain(location, 4, 750D, 0.23);
+                }
+                for (Location location : SpawnPoints.getNachtRoom3()) {
+                    ZombieManager.createZombieSpawnChain(location, 3, 750D, 0.23);
+                }
+                Location loc = SpawnPoints.getNachtRoom1()[1];
+                int index = 0;
+                for (Entity en : loc.getWorld().getEntities()) {
+                    if (en instanceof Zombie) {
+                        if (index == 1) break;
+                        en.remove();
+                        index++;
+                    }
+                }
+            } else {
+
+            }
+        } else {
+            for (Location location : SpawnPoints.getNachtRoom1()) {
+                ZombieManager.createZombieSpawnChain(location, 8, 750D, 0.23);
+            }
+            Location loc = SpawnPoints.getNachtRoom1()[1];
+            int index = 0;
+            for (Entity en : loc.getWorld().getEntities()) {
+                if (en instanceof Zombie) {
+                    if (index == 2) break;
+                    en.remove();
+                    index++;
+                }
+            }
+        }
+
+
+    }
 }
