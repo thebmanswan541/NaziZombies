@@ -59,6 +59,12 @@ public class RoundListener implements Listener{
                                         NachtSpawnManager.spawnRound10();
                                     } else if (Rounds.getRound() == 11) {
                                         NachtSpawnManager.spawnRound11();
+                                    } else if (Rounds.getRound() == 12) {
+                                        NachtSpawnManager.spawnRound12();
+                                    } else if (Rounds.getRound() == 13) {
+                                        NachtSpawnManager.spawnRound13();
+                                    } else if (Rounds.getRound() == 14) {
+                                        NachtSpawnManager.spawnRound14();
                                     }
                                 }
                             }, 200);
